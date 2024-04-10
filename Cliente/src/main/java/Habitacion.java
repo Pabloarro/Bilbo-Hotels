@@ -1,3 +1,5 @@
+package clases;
+
 public class Habitacion implements Comparable<Habitacion> {
 
     public enum TiposHabitacion {
