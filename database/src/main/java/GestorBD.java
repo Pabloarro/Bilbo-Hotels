@@ -2,10 +2,10 @@ package database;
 
 import java.sql.Statement;
 
-import Cliente.src.clases.Cliente;
-import Cliente.src.clases.Habitacion;
-import Cliente.src.clases.Reserva;
-import Cliente.src.clases.Habitacion.TiposHabitacion;
+import Cliente.src.main.java.Cliente;
+import Cliente.src.main.java.Habitacion;
+import Cliente.src.main.java.Reserva;
+import Cliente.src.main.java.Habitacion.TiposHabitacion;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
