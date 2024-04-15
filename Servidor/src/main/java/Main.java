@@ -1,4 +1,4 @@
-package main;
+package com.example;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
@@ -11,9 +11,10 @@ import java.net.URI;
  * Main class.
  *
  */
-public class MainProgram {
+public class Main {
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://0.0.0.0:8080/myapp/";
+    //public static final String BASE_URI = "http://localhost:8080/myapp/";
+	public static final String BASE_URI = "http://0.0.0.0:8080/myapp/";
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
@@ -21,8 +22,8 @@ public class MainProgram {
      */
     public static HttpServer startServer() {
         // create a resource config that scans for JAX-RS resources and providers
-        // in com.dekses.jersey.docker.demo package
-        final ResourceConfig rc = new ResourceConfig().packages("");
+        // in com.example package
+        final ResourceConfig rc = new ResourceConfig().packages("com.example");
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
@@ -38,7 +39,12 @@ public class MainProgram {
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
-        System.in.read();
+        //System.in.read();
+		try {
+			Thread.currentThread().join();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         server.stop();
     }
 }
