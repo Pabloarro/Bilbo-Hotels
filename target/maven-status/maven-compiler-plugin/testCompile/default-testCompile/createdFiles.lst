@@ -1,0 +1,7 @@
+es\deusto\spq\server\ResourceTest.class
+es\deusto\spq\server\jdo\MessageTest.class
+es\deusto\spq\client\ExampleClientTest.class
+es\deusto\spq\pojo\DirectMessageTest.class
+es\deusto\spq\pojo\MessageDataTest.class
+es\deusto\spq\pojo\UserDataTest.class
+es\deusto\spq\server\jdo\UserTest.class
