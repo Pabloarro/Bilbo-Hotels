@@ -1,138 +1,87 @@
-package window;
+package es.deusto.spq.client;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
-public class Login extends JFrame {
-    private List<Cliente> clientes;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-    public Login() {
-        super("Login");
+import es.deusto.spq.pojo.DirectMessage;
+import es.deusto.spq.pojo.MessageData;
+import es.deusto.spq.pojo.UserData;
 
-        // Inicializar la lista de clientes
-        clientes = new ArrayList<>();
+public class Login {
 
-        // Crear algunos clientes de prueba
-        clientes.add(new Cliente("12345678A", "Alejandro", "Pelegrin", "Alejandro", "01/01/1990"));
-        clientes.add(new Cliente("87654321B", "Pablo", "Arroyuelos", "Pablo", "15/06/1985"));
-        clientes.add(new Cliente("77777777C", "Alvaro", "Martinez", "Alvaro", "20/08/2000"));
+	private static final Logger logger = LogManager.getLogger();
 
-        // Configuración de la ventana
-        setSize(300, 150);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+	private static final String USER = "dipina";
+	private static final String PASSWORD = "dipina";
 
-        // Panel principal
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 1));
+	private Client client;
+	private WebTarget webTarget;
 
-        // Botón "Iniciar Sesión"
-        JButton btnIniciarSesion = new JButton("Iniciar Sesión");
-        btnIniciarSesion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Lógica para iniciar sesión
-                JTextField txtNombre = new JTextField();
-                JPasswordField txtContrasenia = new JPasswordField();
+	public Login(String hostname, String port) {
+		client = ClientBuilder.newClient();
+		webTarget = client.target(String.format("http://%s:%s/rest/resource", hostname, port));
+	}
 
-                Object[] message = {
-                        "Nombre de usuario:", txtNombre,
-                        "Contraseña:", txtContrasenia
-                };
+	public boolean registerUser(String login, String password) {
+		WebTarget registerUserWebTarget = webTarget.path("register");
+	
+		UserData userData = new UserData();
+		userData.setLogin(login);
+		userData.setPassword(password);
+		Response response = registerUserWebTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(userData, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			logger.info("Error connecting with the server. Code: {}", response.getStatus());
+			return false;
+		} else {
+			logger.info("User correctly registered");
+			return true;
+		}
+	}
 
-                int option = JOptionPane.showConfirmDialog(null, message, "Iniciar Sesión", JOptionPane.OK_CANCEL_OPTION);
-                if (option == JOptionPane.OK_OPTION) {
-                    String nombre = txtNombre.getText();
-                    String contrasenia = new String(txtContrasenia.getPassword());
-                    Cliente cliente = iniciarSesion(nombre, contrasenia);
-                    if (cliente != null) {
-                        JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso: " + cliente.getNombre());
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Inicio de sesión fallido. Nombre de usuario o contraseña incorrectos.");
-                    }
-                }
-            }
-        });
-        panel.add(btnIniciarSesion);
+	public boolean sayMessage(String login, String password, String message) {
+		WebTarget sayHelloWebTarget = webTarget.path("sayMessage");
 
-        // Botón "Registrarse"
-        JButton btnRegistrarse = new JButton("Registrarse");
-        btnRegistrarse.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Lógica para registrarse
-                JTextField txtDni = new JTextField();
-                JTextField txtNombre = new JTextField();
-                JTextField txtApellido = new JTextField();
-                JTextField txtFechaNacimiento = new JTextField();
-                JPasswordField txtContrasenia = new JPasswordField();
+		DirectMessage directMessage = new DirectMessage();
+		UserData userData = new UserData();
+		userData.setLogin(login);
+		userData.setPassword(password);
 
-                Object[] message = {
-                        "DNI:", txtDni,
-                        "Nombre:", txtNombre,
-                        "Apellido:", txtApellido,
-                        "Fecha de Nacimiento (dd/mm/aaaa):", txtFechaNacimiento,
-                        "Contraseña:", txtContrasenia
-                };
+		directMessage.setUserData(userData);
 
-                int option = JOptionPane.showConfirmDialog(null, message, "Registrarse", JOptionPane.OK_CANCEL_OPTION);
-                if (option == JOptionPane.OK_OPTION) {
-                    String dni = txtDni.getText();
-                    String nombre = txtNombre.getText();
-                    String apellido = txtApellido.getText();
-                    String fechaNacimiento = txtFechaNacimiento.getText();
-                    String contrasenia = new String(txtContrasenia.getPassword());
+		MessageData messageData = new MessageData();
+		messageData.setMessage(message);
+		directMessage.setMessageData(messageData);
 
-                    registrarCliente(dni, nombre, apellido, contrasenia, fechaNacimiento);
-                    JOptionPane.showMessageDialog(null, "Registro exitoso");
-                }
-            }
-        });
-        panel.add(btnRegistrarse);
+		Response response = sayHelloWebTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(directMessage, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			logger.info("Error connecting with the server. Code: {}", response.getStatus());
+			return false;
+		} else {
+			String responseMessage = response.readEntity(String.class);
+			logger.info("* Message coming from the server: {}",  responseMessage);
+			return true;
+		}
+	}
 
-        // Botón "Entrar como Invitado"
-        JButton btnInvitado = new JButton("Entrar como Invitado");
-        btnInvitado.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Lógica para entrar como invitado
-                JOptionPane.showMessageDialog(null, "Bienvenido como invitado");
-            }
-        });
-        panel.add(btnInvitado);
+	public static void main(String[] args) {
+		if (args.length != 2) {
+			logger.error("Use: java Client.Client [host] [port]");
+			System.exit(0);
+		}
 
-        // Agregar el panel a la ventana principal
-        getContentPane().add(panel);
+		String hostname = args[0];
+		String port = args[1];
 
-        // Mostrar la ventana
-        setVisible(true);
-    }
-
-    // Método para iniciar sesión
-    private Cliente iniciarSesion(String nombre, String contrasenia) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getNombre().equals(nombre) && cliente.getContrasenia().equals(contrasenia)) {
-                return cliente;
-            }
-        }
-        return null;
-    }
-
-    // Método para registrar un nuevo cliente
-    private void registrarCliente(String dni, String nombre, String apellido, String contrasenia, String fechaNacimiento) {
-        clientes.add(new Cliente(dni, nombre, apellido, contrasenia, fechaNacimiento));
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new Login();
-            }
-        });
-    }
+		Login login = new Login(hostname, port);
+		login.registerUser(USER, PASSWORD);
+		login.sayMessage(USER, PASSWORD, "This is a test!...");
+	}
 }

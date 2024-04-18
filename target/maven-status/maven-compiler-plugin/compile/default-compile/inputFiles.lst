@@ -1,7 +1,10 @@
-C:\Users\pabloA\Desktop\example-mockito-jersey-mysql\src\main\java\es\deusto\spq\server\Resource.java
-C:\Users\pabloA\Desktop\example-mockito-jersey-mysql\src\main\java\es\deusto\spq\server\jdo\User.java
-C:\Users\pabloA\Desktop\example-mockito-jersey-mysql\src\main\java\es\deusto\spq\client\ExampleClient.java
-C:\Users\pabloA\Desktop\example-mockito-jersey-mysql\src\main\java\es\deusto\spq\server\jdo\Message.java
-C:\Users\pabloA\Desktop\example-mockito-jersey-mysql\src\main\java\es\deusto\spq\pojo\UserData.java
-C:\Users\pabloA\Desktop\example-mockito-jersey-mysql\src\main\java\es\deusto\spq\pojo\DirectMessage.java
-C:\Users\pabloA\Desktop\example-mockito-jersey-mysql\src\main\java\es\deusto\spq\pojo\MessageData.java
+C:\Users\pabloA\SPQ\prueba-project\src\main\java\es\deusto\spq\server\Resource.java
+C:\Users\pabloA\SPQ\prueba-project\src\main\java\es\deusto\spq\pojo\DirectMessage.java
+C:\Users\pabloA\SPQ\prueba-project\src\main\java\es\deusto\spq\server\jdo\User.java
+C:\Users\pabloA\SPQ\prueba-project\src\main\java\es\deusto\spq\client\Reserva.java
+C:\Users\pabloA\SPQ\prueba-project\src\main\java\es\deusto\spq\client\Habitacion.java
+C:\Users\pabloA\SPQ\prueba-project\src\main\java\es\deusto\spq\pojo\UserData.java
+C:\Users\pabloA\SPQ\prueba-project\src\main\java\es\deusto\spq\server\jdo\Message.java
+C:\Users\pabloA\SPQ\prueba-project\src\main\java\es\deusto\spq\client\Cliente.java
+C:\Users\pabloA\SPQ\prueba-project\src\main\java\es\deusto\spq\client\Login.java
+C:\Users\pabloA\SPQ\prueba-project\src\main\java\es\deusto\spq\pojo\MessageData.java

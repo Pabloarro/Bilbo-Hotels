@@ -1,4 +1,4 @@
-package clases;
+package es.deusto.spq.client;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

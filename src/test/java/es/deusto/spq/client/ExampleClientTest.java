@@ -43,7 +43,7 @@ public class ExampleClientTest {
     @Captor
     private ArgumentCaptor<Entity<DirectMessage>> directMessageEntityCaptor;
 
-    private ExampleClient exampleClient;
+    private Login login;
 
     @Before
     public void setUp() {
@@ -54,7 +54,7 @@ public class ExampleClientTest {
             clientBuilder.when(ClientBuilder::newClient).thenReturn(client);
             when(client.target("http://localhost:8080/rest/resource")).thenReturn(webTarget);
 
-            exampleClient = new ExampleClient("localhost", "8080");
+            login = new Login("localhost", "8080");
         }
     }
 
@@ -64,7 +64,7 @@ public class ExampleClientTest {
 
         Response response = Response.ok().build();
         when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
-        assertTrue(exampleClient.registerUser("test-login", "passwd"));
+        assertTrue(login.registerUser("test-login", "passwd"));
 
         verify(webTarget.request(MediaType.APPLICATION_JSON)).post(userDataEntityCaptor.capture());
         assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getLogin());
@@ -77,7 +77,7 @@ public class ExampleClientTest {
 
         Response response = Response.serverError().build();
         when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
-        assertFalse(exampleClient.registerUser("test-login", "passwd"));
+        assertFalse(login.registerUser("test-login", "passwd"));
 
         verify(webTarget.request(MediaType.APPLICATION_JSON)).post(userDataEntityCaptor.capture());
         assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getLogin());
@@ -93,7 +93,7 @@ public class ExampleClientTest {
         when(response.readEntity(String.class)).thenReturn("server says hello");
 
         when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
-        assertTrue(exampleClient.sayMessage("test-login", "passwd", "hello world"));
+        assertTrue(login.sayMessage("test-login", "passwd", "hello world"));
 
         verify(webTarget.request(MediaType.APPLICATION_JSON)).post(directMessageEntityCaptor.capture());
         assertEquals("hello world", directMessageEntityCaptor.getValue().getEntity().getMessageData().getMessage());
@@ -107,7 +107,7 @@ public class ExampleClientTest {
 
         Response response = Response.serverError().build();
         when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
-        assertFalse(exampleClient.sayMessage("test-login", "passwd", "hello world"));
+        assertFalse(login.sayMessage("test-login", "passwd", "hello world"));
 
         verify(webTarget.request(MediaType.APPLICATION_JSON)).post(directMessageEntityCaptor.capture());
         assertEquals("hello world", directMessageEntityCaptor.getValue().getEntity().getMessageData().getMessage());

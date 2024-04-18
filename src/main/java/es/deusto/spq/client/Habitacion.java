@@ -1,4 +1,4 @@
-package clases;
+package es.deusto.spq.client;
 
 public class Habitacion implements Comparable<Habitacion> {
 
