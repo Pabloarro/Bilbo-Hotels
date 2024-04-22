@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Login.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Mockito + Jersey + DataNucleus + MySQL</a> &gt; <a href="index.source.html" class="el_package">es.deusto.spq.client</a> &gt; <span class="el_source">Login.java</span></div><h1>Login.java</h1><pre class="source lang-java linenums">package es.deusto.spq.client;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import es.deusto.spq.pojo.DirectMessage;
+import es.deusto.spq.pojo.MessageData;
+import es.deusto.spq.pojo.UserData;
+
+public class Login {
+
+<span class="fc" id="L20">	private static final Logger logger = LogManager.getLogger();</span>
+
+	private static final String USER = &quot;dipina&quot;;
+	private static final String PASSWORD = &quot;dipina&quot;;
+
+	private Client client;
+	private WebTarget webTarget;
+
+<span class="fc" id="L28">	public Login(String hostname, String port) {</span>
+<span class="fc" id="L29">		client = ClientBuilder.newClient();</span>
+<span class="fc" id="L30">		webTarget = client.target(String.format(&quot;http://%s:%s/rest/resource&quot;, hostname, port));</span>
+<span class="fc" id="L31">	}</span>
+
+	public boolean registerUser(String login, String password) {
+<span class="fc" id="L34">		WebTarget registerUserWebTarget = webTarget.path(&quot;register&quot;);</span>
+	
+<span class="fc" id="L36">		UserData userData = new UserData();</span>
+<span class="fc" id="L37">		userData.setLogin(login);</span>
+<span class="fc" id="L38">		userData.setPassword(password);</span>
+<span class="fc" id="L39">		Response response = registerUserWebTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(userData, MediaType.APPLICATION_JSON));</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">		if (response.getStatus() != Status.OK.getStatusCode()) {</span>
+<span class="fc" id="L41">			logger.info(&quot;Error connecting with the server. Code: {}&quot;, response.getStatus());</span>
+<span class="fc" id="L42">			return false;</span>
+		} else {
+<span class="fc" id="L44">			logger.info(&quot;User correctly registered&quot;);</span>
+<span class="fc" id="L45">			return true;</span>
+		}
+	}
+
+	public boolean sayMessage(String login, String password, String message) {
+<span class="fc" id="L50">		WebTarget sayHelloWebTarget = webTarget.path(&quot;sayMessage&quot;);</span>
+
+<span class="fc" id="L52">		DirectMessage directMessage = new DirectMessage();</span>
+<span class="fc" id="L53">		UserData userData = new UserData();</span>
+<span class="fc" id="L54">		userData.setLogin(login);</span>
+<span class="fc" id="L55">		userData.setPassword(password);</span>
+
+<span class="fc" id="L57">		directMessage.setUserData(userData);</span>
+
+<span class="fc" id="L59">		MessageData messageData = new MessageData();</span>
+<span class="fc" id="L60">		messageData.setMessage(message);</span>
+<span class="fc" id="L61">		directMessage.setMessageData(messageData);</span>
+
+<span class="fc" id="L63">		Response response = sayHelloWebTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(directMessage, MediaType.APPLICATION_JSON));</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">		if (response.getStatus() != Status.OK.getStatusCode()) {</span>
+<span class="fc" id="L65">			logger.info(&quot;Error connecting with the server. Code: {}&quot;, response.getStatus());</span>
+<span class="fc" id="L66">			return false;</span>
+		} else {
+<span class="fc" id="L68">			String responseMessage = response.readEntity(String.class);</span>
+<span class="fc" id="L69">			logger.info(&quot;* Message coming from the server: {}&quot;,  responseMessage);</span>
+<span class="fc" id="L70">			return true;</span>
+		}
+	}
+
+	public static void main(String[] args) {
+<span class="nc bnc" id="L75" title="All 2 branches missed.">		if (args.length != 2) {</span>
+<span class="nc" id="L76">			logger.error(&quot;Use: java Client.Client [host] [port]&quot;);</span>
+<span class="nc" id="L77">			System.exit(0);</span>
+		}
+
+<span class="nc" id="L80">		String hostname = args[0];</span>
+<span class="nc" id="L81">		String port = args[1];</span>
+
+<span class="nc" id="L83">		Login login = new Login(hostname, port);</span>
+<span class="nc" id="L84">		login.registerUser(USER, PASSWORD);</span>
+<span class="nc" id="L85">		login.sayMessage(USER, PASSWORD, &quot;This is a test!...&quot;);</span>
+<span class="nc" id="L86">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

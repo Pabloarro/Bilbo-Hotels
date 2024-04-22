@@ -29,3 +29,6 @@ To launch the server run the command
 Now, the client sample code can be executed in a new command window with
 
     mvn exec:java -Pclient
+
+
+http://localhost:8080/rest/resource/hello

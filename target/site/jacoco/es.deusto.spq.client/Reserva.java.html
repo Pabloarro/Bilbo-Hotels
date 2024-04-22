@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Reserva.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Mockito + Jersey + DataNucleus + MySQL</a> &gt; <a href="index.source.html" class="el_package">es.deusto.spq.client</a> &gt; <span class="el_source">Reserva.java</span></div><h1>Reserva.java</h1><pre class="source lang-java linenums">package es.deusto.spq.client;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Reserva {
+    
+    private int cod; 
+    private String fechaInicio;
+    private String fechaFin;
+    private Cliente cliente;
+    private ArrayList&lt;Habitacion&gt; ListaHabitaciones;
+    private int numPersonas;
+
+<span class="nc" id="L17">    private SimpleDateFormat sdf = new SimpleDateFormat(&quot;dd/MM/yy&quot;);</span>
+    
+<span class="nc" id="L19">    public Reserva(Cliente cliente) {</span>
+<span class="nc" id="L20">        this.cliente = cliente;</span>
+<span class="nc" id="L21">        this.ListaHabitaciones = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L22">    }</span>
+
+<span class="nc" id="L24">    public Reserva(int cod, String fechaInicio, String fechaFin, Cliente cliente, ArrayList&lt;Habitacion&gt; alHabitaciones, int numPersonas) {</span>
+<span class="nc" id="L25">        this.cod = cod;</span>
+<span class="nc" id="L26">        this.fechaInicio = fechaInicio;</span>
+<span class="nc" id="L27">        this.fechaFin = fechaFin;</span>
+<span class="nc" id="L28">        this.cliente = cliente;</span>
+<span class="nc" id="L29">        this.ListaHabitaciones = alHabitaciones;</span>
+<span class="nc" id="L30">        this.numPersonas = numPersonas;</span>
+<span class="nc" id="L31">    }</span>
+    
+    public int getCod() {
+<span class="nc" id="L34">        return cod;</span>
+    }
+
+    public void setCod(int cod) {
+<span class="nc" id="L38">        this.cod = cod;</span>
+<span class="nc" id="L39">    }</span>
+
+    public String getFechaInicio() {
+<span class="nc" id="L42">        return fechaInicio;</span>
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+<span class="nc" id="L46">        this.fechaInicio = fechaInicio;</span>
+<span class="nc" id="L47">    }</span>
+
+    public String getFechaFin() {
+<span class="nc" id="L50">        return fechaFin;</span>
+    }
+
+    public void setFechaFin(String fechaFin) {
+<span class="nc" id="L54">        this.fechaFin = fechaFin;</span>
+<span class="nc" id="L55">    }</span>
+
+    public Cliente getCliente() {
+<span class="nc" id="L58">        return cliente;</span>
+    }
+
+    public void setCliente(Cliente cliente) {
+<span class="nc" id="L62">        this.cliente = cliente;</span>
+<span class="nc" id="L63">    }</span>
+
+    public ArrayList&lt;Habitacion&gt; getListaHabitaciones() {
+<span class="nc" id="L66">        return ListaHabitaciones;</span>
+    }
+
+    public void setListaHabitaciones(ArrayList&lt;Habitacion&gt; listaHabitaciones) {
+<span class="nc" id="L70">        ListaHabitaciones = listaHabitaciones;</span>
+<span class="nc" id="L71">    }</span>
+
+    public SimpleDateFormat getSdf() {
+<span class="nc" id="L74">        return sdf;</span>
+    }
+
+    public void setSdf(SimpleDateFormat sdf) {
+<span class="nc" id="L78">        this.sdf = sdf;</span>
+<span class="nc" id="L79">    }</span>
+
+    public int getNumPersonas() {
+<span class="nc" id="L82">        return numPersonas;</span>
+    }
+
+    public void setNumPersonas(int numPersonas) {
+<span class="nc" id="L86">        this.numPersonas = numPersonas;</span>
+<span class="nc" id="L87">    }</span>
+
+    public int numeroDeDias() {
+<span class="nc" id="L90">    	int num = 0;</span>
+    	try {
+<span class="nc" id="L92">			Date fi = sdf.parse(fechaInicio);</span>
+<span class="nc" id="L93">			Date ff = sdf.parse(fechaFin);</span>
+<span class="nc" id="L94">			num = (int) ((ff.getTime()-fi.getTime()) / (24*60*60*1000));</span>
+<span class="nc" id="L95">		} catch (ParseException e) {</span>
+<span class="nc" id="L96">			e.printStackTrace();</span>
+<span class="nc" id="L97">		}</span>
+<span class="nc" id="L98">    	return num;</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L102">        return &quot;Reserva-&gt;[fechaInicio=&quot; + fechaInicio + &quot;, fechaFin=&quot; + fechaFin + &quot;, cliente=&quot; + cliente</span>
+                + &quot;, ListaHabitaciones=&quot; + ListaHabitaciones + &quot;]&quot;;
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
