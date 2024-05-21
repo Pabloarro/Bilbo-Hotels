@@ -1,0 +1,12 @@
+es\deusto\bilboHotels\model\dto\HabitacionSeleccionDTO$HabitacionSeleccionDTOBuilder.class
+es\deusto\bilboHotels\model\dto\HotelBusquedaDTO.class
+es\deusto\bilboHotels\model\dto\HabitacionSeleccionDTO.class
+es\deusto\bilboHotels\model\enums\TipoHabitacion.class
+es\deusto\bilboHotels\model\dto\HabitacionDTO.class
+es\deusto\bilboHotels\model\dto\DireccionDTO$DireccionDTOBuilder.class
+es\deusto\bilboHotels\model\dto\HotelRegistroDTO.class
+es\deusto\bilboHotels\model\dto\HotelRegistroDTO$HotelRegistroDTOBuilder.class
+es\deusto\bilboHotels\model\dto\HotelBusquedaDTO$HotelBusquedaDTOBuilder.class
+es\deusto\bilboHotels\model\enums\EstadoPago.class
+es\deusto\bilboHotels\model\dto\HabitacionDTO$HabitacionDTOBuilder.class
+es\deusto\bilboHotels\model\dto\DireccionDTO.class

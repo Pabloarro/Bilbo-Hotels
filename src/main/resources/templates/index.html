@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout-main}">
+<head>
+    <title>Inicio</title>
+    <style>
+        body {
+            
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .content {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="content container pt-5">
+        <div class="row justify-content-center align-items-start">
+            <div class="col-12 text-center">
+                <h1 class="display-5 mb-5"><strong>BILBO HOTELES</strong></h1>
+                <p class="lead fs-3 mb-5">Creemos en hacer que tus planes de viaje sean simples y agradables.<br>¡Comencemos una nueva aventura!</p>
+                <a href="/login" class="btn btn-primary btn-lg">Login</a>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout-main}">
+<head>
+    <title>Mis Hoteles</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Mis hoteles</h2>
+                <div th:if="${message}">
+                    <div class="alert alert-success" th:text="${message}">
+                    </div>
+                </div>
+                <table class="table table-striped align-middle">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio habitacion simple</th>
+                        <th>Precio habitacion doble</th>
+                        <th>Editar</th>
+                        <th>Borrar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="align-middle" th:each="hotel : ${hotels}">
+                        <td th:text="${hotel.id}"></td>
+                        <td th:text="${hotel.nombre}"></td>
+                        <td th:each="habitacion : ${hotel.habitacionDTOs}" th:if="${habitacion.tipoHabitacion.name() == 'INDIVIDUAL'}" th:text="'$ ' + ${#numbers.formatDecimal(habitacion.precioPorNoche, 1, 'COMMA', 2, 'POINT')}"></td>
+                        <td th:each="habitacion : ${hotel.habitacionDTOs}" th:if="${habitacion.tipoHabitacion.name() == 'DOBLE'}" th:text="'$ ' + ${#numbers.formatDecimal(habitacion.precioPorNoche, 1, 'COMMA', 2, 'POINT')}"></td>
+                        <td>
+                            <a th:href="@{/manager/hotels/edit/{id}(id=${hotel.id})}">Editar</a>
+                        </td>
+                        <td>
+                            <form method="post"
+                                  th:action="@{/manager/hotels/delete/{id}(id=${hotel.id})}"
+                                  onsubmit="return confirm('Estas seguro de que quieres borrar este hotel?');">
+                                <input type="hidden" name="_method" value="DELETE"/>
+                                <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layout/layout-main">
+<head>
+    <title>Login </title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">Email o contrasenia incorrectos</div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-success">Te has deslogueado</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Login</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" th:action="@{/login}">
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="username">Email:</label>
+                                <input class="form-control" id="username" name="username" type="email" placeholder="Email" autofocus>
+                                <small class="form-text text-muted">ejemplo@gmail.com</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="password">contrasenia:</label>
+                                <input class="form-control" id="password" name="password" type="password"
+                                       placeholder="Introduce tu contrasenia">
+                            </div>
+                            <div class="form-group mb-3">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                                <span>No registrado? <a th:href="@{/register/customer}">Registrate</a></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

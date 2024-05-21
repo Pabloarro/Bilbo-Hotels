@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout-main}">
+<head>
+    <title>Completar Pago</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <i class="bi bi-check-circle-fill text-primary"></i> <span class="text-primary">Tu seleccion</span>
+            </div>
+            <div class="col-md-6 text-center">
+                <i class="bi bi-check-circle text-primary"></i> <span class="text-primary">Completar detalles</span>
+            </div>
+        </div>
+        <hr>
+        <!-- Booking Details -->
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Hotel Details -->
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <p><strong th:text="${hotelDTO.nombre}">Nombre Hotel</strong></p>
+                        <p th:text="${hotelDTO.direccionDTO.getLineaDireccion()}">Direccion</p>
+                        <p th:text="${hotelDTO.direccionDTO.ciudad + ', ' + hotelDTO.direccionDTO.pais}">Ciudad, Pais</p>
+                    </div>
+                </div>
+                <!-- Check-in, Check-out & Duration -->
+                <div class="card mb-2">
+                    <div class="row card-body">
+                        <div class="col">
+                            <p><strong>Check-in</strong></p>
+                            <p th:text="${inicioReservaDTO.fechaCheckIn}"></p>
+                        </div>
+                        <div class="col">
+                            <p><strong>Check-out</strong></p>
+                            <p th:text="${inicioReservaDTO.fechaCheckOut}"></p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Duración de la estancia:</strong></p>
+                        <p><span th:text="${inicioReservaDTO.duracionDias}">0></span> noche(s)</p>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Habitaciones seleccionadas:</strong></p>
+                        <div th:each="seleccionHabitacion : ${inicioReservaDTO.habitacionSelecciones}"
+                             th:if="${seleccionHabitacion.contar > 0}">
+                            <p th:text="${seleccionHabitacion.contar + ' x ' + seleccionHabitacion.tipoHabitacion}">0 x Habitacion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Price and Payment Form -->
+            <div class="col-md-8">
+                <!-- Price Details -->
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h4><strong>Precio total:</strong></h4>
+                        <h4 th:utext="'$ ' + ${#numbers.formatDecimal(inicioReservaDTO.precioTotal, 0, 'COMMA', 2, 'POINT')}">$0.00</h4>
+                    </div>
+                </div>
+                <!-- Payment Form -->
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <form action="/booking/payment" method="post" th:object="${tarjetaPagoDTO}">
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="nombreTitular">Nombre del titular</label>
+                                <input class="form-control" id="nombreTitular" type="text" th:field="*{nombreTitular}"
+                                       required>
+                                <p class="text-danger" th:if="${#fields.hasErrors('nombreTitular')}"
+                                   th:errors="*{nombreTitular}"></p>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="numeroTarjeta">Numero Tarjeta</label>
+                                <input class="form-control" id="numeroTarjeta" type="text" th:field="*{numeroTarjeta}" required>
+                                <p class="text-danger" th:if="${#fields.hasErrors('numeroTarjeta')}" th:errors="*{numeroTarjeta}"></p>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <div class="col-6">
+                                    <label class="form-label" for="caducidadTarjeta">Caducidad de la Tarjeta </label>
+                                    <input class="form-control" id="caducidadTarjeta" type="text" th:field="*{caducidadTarjeta}"
+                                           placeholder="MM/YY" required>
+                                    <p class="text-danger" th:if="${#fields.hasErrors('caducidadTarjeta')}"
+                                       th:errors="*{caducidadTarjeta}"></p>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" for="cvc">CVC</label>
+                                    <input class="form-control" id="cvc" type="text" th:field="*{cvc}" required>
+                                    <p class="text-danger" th:if="${#fields.hasErrors('cvc')}" th:errors="*{cvc}"></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group text-end">
+                                <button type="submit" class="btn btn-primary">Completar reserva</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+<th:block layout:fragment="additional-scripts">
+    <script>
+        document.getElementById('nombreTitular').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, ''); // Allow only letters and spaces
+        });
+        document.getElementById('numeroTarjeta').addEventListener('input', function(e) {
+            this.value = this.value.replace(/\D/g, '').slice(0, 16); // Allow only numbers, limit to 16 digits
+        });
+        document.getElementById('cvc').addEventListener('input', function(e) {
+            this.value = this.value.replace(/\D/g, '').slice(0, 3); // Allow only numbers, limit to 3 digits
+        });
+        document.getElementById('caducidadTarjeta').addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, ''); // Allow only numbers
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4); // Insert '/' after the first 2 digits
+            }
+            this.value = value.slice(0, 5); // Limit to 5 characters, including the '/'
+        });
+    </script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout-main}">
+<head>
+    <title>Buscar hotel</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="mb-3">
+                    
+                </div>
+                <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Buscar hotel</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" th:action="@{/search}" th:object="${hotelBusquedaDTO}">
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="ciudad">Ciudad:</label>
+                                <input class="form-control" id="ciudad" type="text" th:field="*{ciudad}"
+                                       placeholder="Introduce la ciudad" autofocus>
+                                <p class="text-danger" th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}"></p>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="fechaCheckIn">Fecha Check-in:</label>
+                                <input class="form-control" id="fechaCheckIn" type="text" th:field="*{fechaCheckIn}">
+                                <p class="text-danger" th:if="${#fields.hasErrors('fechaCheckIn')}" th:errors="*{fechaCheckIn}"></p>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="fechaCheckOut">Fecha Check-out :</label>
+                                <input class="form-control" id="fechaCheckOut" type="text" th:field="*{fechaCheckOut}">
+                                <p class="text-danger" th:if="${#fields.hasErrors('fechaCheckOut')}" th:errors="*{fechaCheckOut}"></p>
+                            </div>
+                            <div class="form-group mb-3">
+                                <button type="submit" class="btn btn-primary">Buscar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+<th:block layout:fragment="additional-scripts">
+    <script>
+        $(document).ready(function () {
+            const displayFormat = "dd.mm.yy";
+            const submitFormat = "yy-mm-dd"; // Format that Spring Boot expects for LocalDate
+
+            // Block invalid characters for ciudad input
+            $("#ciudad").on("input", function () {
+                var value = $(this).val();
+                var filteredValue = value.replace(/[^A-Za-z\s'-]/g, "");
+                $(this).val(filteredValue);
+            });
+
+            // Initialize fechaCheckIn
+            $("#fechaCheckIn").datepicker({
+                dateFormat: displayFormat,
+                minDate: 0,
+                onClose: function (selectedDate) {
+                    if (selectedDate) {
+                        var checkoutMinDate = $.datepicker.parseDate(displayFormat, selectedDate);
+                        checkoutMinDate.setDate(checkoutMinDate.getDate() + 1); // Minimum 1 day after check-in
+                        $("#fechaCheckOut").datepicker("option", "minDate", checkoutMinDate);
+                    }
+                }
+            }).attr('readonly', 'readonly');
+
+            // Initialize fechaCheckOut
+            $("#fechaCheckOut").datepicker({
+                dateFormat: displayFormat,
+                minDate: +1
+            }).attr('readonly', 'readonly');
+
+            // Reformat dates on form submit
+            $("form").on("submit", function () {
+                var fechaCheckIn = $('#fechaCheckIn').datepicker('getDate');
+                var fechaCheckOut = $('#fechaCheckOut').datepicker('getDate');
+                $('#fechaCheckIn').val($.datepicker.formatDate(submitFormat, fechaCheckIn));
+                $('#fechaCheckOut').val($.datepicker.formatDate(submitFormat, fechaCheckOut));
+            });
+
+            // Placeholder
+            $("#fechaCheckIn, #fechaCheckOut").each(function () {
+                $(this).attr("placeholder", "Select date");
+            });
+        });
+    </script>
+</th:block>
+</body>
+</html>
