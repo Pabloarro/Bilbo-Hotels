@@ -92,19 +92,21 @@ public class TestDataInitializer implements CommandLineRunner {
                 repoDireccion.save(addressBilbo2);
                 repoDireccion.save(addressBilbo3);
 
-                Hotel hotelBrk1 = Hotel.builder().nombre("Hotel Puerta bilbao")
-                        .direccion(addressBrk1).hotelManager(mh1).build();
-                Hotel hotelBrk2 = Hotel.builder().nombre("Four Seasons Hotel Istanbul")
-                        .direccion(addressBrk2).hotelManager(mh1).build();
-                Hotel hotelBrk3 = Hotel.builder().nombre("Ciragan Palace Kempinski Istanbul")
-                        .direccion(addressBrk3).hotelManager(mh1).build();
-
                 Hotel hotelBilbao1 = Hotel.builder().nombre("Hotel ibis Bilbao")
                         .direccion(addressBilbo1).hotelManager(mh2).build();
                 Hotel hotelBilbao2 = Hotel.builder().nombre("Hotel Abando")
                         .direccion(addressBilbo2).hotelManager(mh2).build();
                 Hotel hotelBilbao3 = Hotel.builder().nombre("Petit Palace Arana")
                         .direccion(addressBilbo3).hotelManager(mh2).build();
+                        
+                Hotel hotelBrk1 = Hotel.builder().nombre("Hotel Puerta bilbao")
+                        .direccion(addressBrk1).hotelManager(mh1).build();
+                Hotel hotelBrk2 = Hotel.builder().nombre("Ibis Bilbao")
+                        .direccion(addressBrk2).hotelManager(mh1).build();
+                Hotel hotelBrk3 = Hotel.builder().nombre("Hotel azeko")
+                        .direccion(addressBrk3).hotelManager(mh1).build();
+
+
 
                 Habitacion INDIVIDUALRoomBrk1 = Habitacion.builder().tipoHabitacion(TipoHabitacion.INDIVIDUAL)
                         .precioPorNoche(370).contadorHabitacion(35).hotel(hotelBrk1).build();
@@ -121,27 +123,27 @@ public class TestDataInitializer implements CommandLineRunner {
                 Habitacion DOBLERoomBrk3 = Habitacion.builder().tipoHabitacion(TipoHabitacion.DOBLE)
                         .precioPorNoche(800).contadorHabitacion(75).hotel(hotelBrk3).build();
 
-                Habitacion INDIVIDUALRoomBerlin1 = Habitacion.builder().tipoHabitacion(TipoHabitacion.INDIVIDUAL)
+                Habitacion INDIVIDUALRoomBilbao1 = Habitacion.builder().tipoHabitacion(TipoHabitacion.INDIVIDUAL)
                         .precioPorNoche(120.0).contadorHabitacion(25).hotel(hotelBilbao1).build();
-                Habitacion DOBLERoomBerlin1 = Habitacion.builder().tipoHabitacion(TipoHabitacion.DOBLE)
+                Habitacion DOBLERoomBilbao1 = Habitacion.builder().tipoHabitacion(TipoHabitacion.DOBLE)
                         .precioPorNoche(250.0).contadorHabitacion(15).hotel(hotelBilbao1).build();
 
-                Habitacion INDIVIDUALRoomBerlin2 = Habitacion.builder().tipoHabitacion(TipoHabitacion.INDIVIDUAL)
+                Habitacion INDIVIDUALRoomBilbao2 = Habitacion.builder().tipoHabitacion(TipoHabitacion.INDIVIDUAL)
                         .precioPorNoche(300).contadorHabitacion(50).hotel(hotelBilbao2).build();
-                Habitacion DOBLERoomBerlin2 = Habitacion.builder().tipoHabitacion(TipoHabitacion.DOBLE)
+                Habitacion DOBLERoomBilbao2 = Habitacion.builder().tipoHabitacion(TipoHabitacion.DOBLE)
                         .precioPorNoche(400).contadorHabitacion(50).hotel(hotelBilbao2).build();
 
-                Habitacion INDIVIDUALRoomBerlin3 = Habitacion.builder().tipoHabitacion(TipoHabitacion.INDIVIDUAL)
+                Habitacion INDIVIDUALRoomBilbao3 = Habitacion.builder().tipoHabitacion(TipoHabitacion.INDIVIDUAL)
                         .precioPorNoche(179).contadorHabitacion(45).hotel(hotelBilbao3).build();
-                Habitacion DOBLERoomBerlin3 = Habitacion.builder().tipoHabitacion(TipoHabitacion.DOBLE)
+                Habitacion DOBLERoomBilbao3 = Habitacion.builder().tipoHabitacion(TipoHabitacion.DOBLE)
                         .precioPorNoche(256).contadorHabitacion(25).hotel(hotelBilbao3).build();
 
                 hotelBrk1.getHabitaciones().addAll(Arrays.asList(INDIVIDUALRoomBrk1,DOBLERoomBrk1));
                 hotelBrk2.getHabitaciones().addAll(Arrays.asList(INDIVIDUALRoomBrk2,DOBLERoomBrk2));
                 hotelBrk3.getHabitaciones().addAll(Arrays.asList(INDIVIDUALRoomBrk3,DOBLERoomBrk3));
-                hotelBilbao1.getHabitaciones().addAll(Arrays.asList(INDIVIDUALRoomBerlin1,DOBLERoomBerlin1));
-                hotelBilbao2.getHabitaciones().addAll(Arrays.asList(INDIVIDUALRoomBerlin2,DOBLERoomBerlin2));
-                hotelBilbao3.getHabitaciones().addAll(Arrays.asList(INDIVIDUALRoomBerlin3,DOBLERoomBerlin3));
+                hotelBilbao1.getHabitaciones().addAll(Arrays.asList(INDIVIDUALRoomBilbao1,DOBLERoomBilbao1));
+                hotelBilbao2.getHabitaciones().addAll(Arrays.asList(INDIVIDUALRoomBilbao2,DOBLERoomBilbao2));
+                hotelBilbao3.getHabitaciones().addAll(Arrays.asList(INDIVIDUALRoomBilbao3,DOBLERoomBilbao3));
 
                 repoHotel.save(hotelBrk1);
                 repoHotel.save(hotelBrk2);
@@ -152,9 +154,9 @@ public class TestDataInitializer implements CommandLineRunner {
                 log.info("Datos del hotel persistidos");
 
                 Disponibilidad dis1Bilbao1 = Disponibilidad.builder().hotel(hotelBilbao1)
-                        .fecha(LocalDate.of(2024,5,20)).habitacion(INDIVIDUALRoomBerlin1).habitacionesDisponibles(5).build();
+                        .fecha(LocalDate.of(2024,5,20)).habitacion(INDIVIDUALRoomBrk1).habitacionesDisponibles(5).build();
                 Disponibilidad dis2Bilbao1 = Disponibilidad.builder().hotel(hotelBilbao1)
-                        .fecha(LocalDate.of(2024,5,21)).habitacion(DOBLERoomBerlin1).habitacionesDisponibles(7).build();
+                        .fecha(LocalDate.of(2024,5,21)).habitacion(DOBLERoomBrk1).habitacionesDisponibles(7).build();
 
                 repoDisponibilidad.save(dis1Bilbao1);
                 repoDisponibilidad.save(dis2Bilbao1);
