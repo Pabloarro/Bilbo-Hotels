@@ -1,0 +1,37 @@
+\doxysection{Habitacion\+DTO.\+java}
+\hypertarget{_habitacion_d_t_o_8java_source}{}\label{_habitacion_d_t_o_8java_source}\index{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/model/dto/HabitacionDTO.java@{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/model/dto/HabitacionDTO.java}}
+\mbox{\hyperlink{_habitacion_d_t_o_8java}{Ir a la documentación de este archivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00001}00001\ \textcolor{keyword}{package\ }es.deusto.bilboHotels.model.dto;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00003}00003\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.enums.TipoHabitacion;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00004}00004\ \textcolor{keyword}{import}\ jakarta.validation.constraints.NotNull;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00005}00005\ \textcolor{keyword}{import}\ jakarta.validation.constraints.PositiveOrZero;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00006}00006\ \textcolor{keyword}{import}\ lombok.AllArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00007}00007\ \textcolor{keyword}{import}\ lombok.Builder;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00008}00008\ \textcolor{keyword}{import}\ lombok.Data;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00009}00009\ \textcolor{keyword}{import}\ lombok.NoArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00011}00011\ @Data}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00012}00012\ @Builder}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00013}00013\ @NoArgsConstructor}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00014}00014\ @AllArgsConstructor}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00015}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1model_1_1dto_1_1_habitacion_d_t_o}{00015}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1model_1_1dto_1_1_habitacion_d_t_o}{HabitacionDTO}}\ \{}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ Long\ id;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ Long\ hotelId;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ TipoHabitacion\ tipoHabitacion;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00023}00023\ \ \ \ \ @NotNull(message\ =\ \textcolor{stringliteral}{"{}El\ contador\ de\ habitacion\ no\ puede\ estar\ vacio"{}})}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00024}00024\ \ \ \ \ @PositiveOrZero(message\ =\ \textcolor{stringliteral}{"{}El\ contador\ de\ habitaciones\ debe\ ser\ 0\ o\ mas"{}})}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ Integer\ contadorHabitacion;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00027}00027\ \ \ \ \ @NotNull(message\ =\ \textcolor{stringliteral}{"{}El\ preciop\ no\ puede\ estar\ vacio"{}})}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00028}00028\ \ \ \ \ @PositiveOrZero(message\ =\ \textcolor{stringliteral}{"{}El\ precio\ por\ noche\ debe\ ser\ 0\ o\ más."{}})}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ Double\ precioPorNoche;}
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_habitacion_d_t_o_8java_source_l00031}00031\ \}}
+
+\end{DoxyCode}

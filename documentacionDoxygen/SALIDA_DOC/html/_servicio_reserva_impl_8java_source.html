@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.11.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bilbo-hotels: Archivo de código fuente C:/Users/pabloA/Bilbo-Hotels/src/main/java/es/deusto/bilboHotels/service/impl/ServicioReservaImpl.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bilbo-hotels<span id="projectnumber">&#160;1</span>
+   </div>
+   <div id="projectbrief">Hoteles bilbao</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fd3f6763802dee1ad875f6c80eac0bda.html">java</a></li><li class="navelem"><a class="el" href="dir_f9b1e2a59d62d001356ff527358589e3.html">es</a></li><li class="navelem"><a class="el" href="dir_218602b84a76f1dba535b3f8d119ec0a.html">deusto</a></li><li class="navelem"><a class="el" href="dir_4f7773f84f9f9111f837ca3298bc6c62.html">bilboHotels</a></li><li class="navelem"><a class="el" href="dir_f6baeb67eeb10ef7c54cf45ba6d44a35.html">service</a></li><li class="navelem"><a class="el" href="dir_434add1ceac8b1f0ed74115e4da82065.html">impl</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">ServicioReservaImpl.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_servicio_reserva_impl_8java.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>es.deusto.bilboHotels.service.impl;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> es.deusto.bilboHotels.model.*;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> es.deusto.bilboHotels.model.dto.DireccionDTO;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> es.deusto.bilboHotels.model.dto.ReservaDTO;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> es.deusto.bilboHotels.model.dto.InicioReservaDTO;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> es.deusto.bilboHotels.model.dto.HabitacionSeleccionDTO;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> es.deusto.bilboHotels.repository.RepoReserva;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">import</span> es.deusto.bilboHotels.service.*;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> jakarta.persistence.EntityNotFoundException;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> jakarta.transaction.Transactional;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> lombok.RequiredArgsConstructor;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> org.springframework.stereotype.Service;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> java.time.LocalDate;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> java.util.Comparator;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">import</span> java.util.List;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">import</span> java.util.stream.Collectors;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>@Service</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>@RequiredArgsConstructor</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>@Slf4j</div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html">   24</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html">ServicioReservaImpl</a> <span class="keyword">implements</span> ServicioReserva {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">private</span> <span class="keyword">final</span> RepoReserva repoReserva;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">private</span> <span class="keyword">final</span> ServicioDisponibilidad servicioDisponibilidad;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">private</span> <span class="keyword">final</span> ServicioPago servicioPago;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">private</span> <span class="keyword">final</span> ServicioCliente servicioCliente;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">private</span> <span class="keyword">final</span> ServicioHotel servicioHotel;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    @Override</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    @Transactional</div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#ac5f8602b5ad99b0efd15a3eee2c46d8f">   35</a></span>    <span class="keyword">public</span> Reserva <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#ac5f8602b5ad99b0efd15a3eee2c46d8f">saveBooking</a>(InicioReservaDTO bookingInitiationDTO, Long usuarioId) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        validateBookingDates(bookingInitiationDTO.getFechaCheckIn(), bookingInitiationDTO.getFechaCheckOut());</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        Cliente customer = servicioCliente.buscarByUsuarioId(usuarioId)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                .orElseThrow(() -&gt; <span class="keyword">new</span> EntityNotFoundException(<span class="stringliteral">&quot;Cliente no encontrado con ID: &quot;</span> + usuarioId));</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        Hotel hotel = servicioHotel.buscarHotelById(bookingInitiationDTO.getHotelId())</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                .orElseThrow(() -&gt; <span class="keyword">new</span> EntityNotFoundException(<span class="stringliteral">&quot;Hotel no encontrado con ID: &quot;</span> + bookingInitiationDTO.getHotelId()));</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        Reserva booking = mapBookingInitDtoToBookingModel(bookingInitiationDTO, customer, hotel);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> repoReserva.save(booking);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    @Override</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    @Transactional</div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a9a071a6c3e91640d0e8f7e86b9ba63c7">   51</a></span>    <span class="keyword">public</span> ReservaDTO <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a9a071a6c3e91640d0e8f7e86b9ba63c7">confirmarReserva</a>(InicioReservaDTO inicioReservaDTO, Long clienteId) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        Reserva savedBooking = this.<a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#ac5f8602b5ad99b0efd15a3eee2c46d8f">saveBooking</a>(inicioReservaDTO, clienteId);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        Pago savedPayment = servicioPago.savePayment(inicioReservaDTO, savedBooking);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        savedBooking.setPago(savedPayment);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        repoReserva.save(savedBooking);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        servicioDisponibilidad.actualizarDisponibilidades(inicioReservaDTO.getHotelId(), inicioReservaDTO.getFechaCheckIn(),</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        inicioReservaDTO.getFechaCheckOut(), inicioReservaDTO.getHabitacionSelecciones());</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a66efb0bcc1cbf7b3796fe11f05329a99">mapReservaModelToReservaDto</a>(savedBooking);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    @Override</div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#aa7440bc41638bef7aea22c7d2af4ffd0">   62</a></span>    <span class="keyword">public</span> List&lt;ReservaDTO&gt; <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#aa7440bc41638bef7aea22c7d2af4ffd0">buscarAllReservas</a>() {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        List&lt;Reserva&gt; bookings = repoReserva.findAll();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> bookings.stream()</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                .map(this::mapReservaModelToReservaDto)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                .collect(Collectors.toList());</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    @Override</div>
+<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a4efa8a825c07c893c9c3022313965f0d">   70</a></span>    <span class="keyword">public</span> ReservaDTO <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a4efa8a825c07c893c9c3022313965f0d">buscarReservaById</a>(Long reservaId) {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        Reserva reserva = repoReserva.findById(reservaId)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                .orElseThrow(() -&gt; <span class="keyword">new</span> EntityNotFoundException(<span class="stringliteral">&quot;Reserva no encontrada con ID: &quot;</span> + reservaId));</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a66efb0bcc1cbf7b3796fe11f05329a99">mapReservaModelToReservaDto</a>(reserva);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    }</div>
+</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    @Override</div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a02be6d4789ca5a013432ab3c706fafc6">   77</a></span>    <span class="keyword">public</span> List&lt;ReservaDTO&gt; <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a02be6d4789ca5a013432ab3c706fafc6">buscarReservasByClienteId</a>(Long clienteId) {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        List&lt;Reserva&gt; bookingDTOs = repoReserva.findBookingsByClienteId(clienteId);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">return</span> bookingDTOs.stream()</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                .map(this::mapReservaModelToReservaDto)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                .sorted(Comparator.comparing(ReservaDTO::getFechaCheckIn))</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                .collect(Collectors.toList());</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    @Override</div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#af96c6fcc8eb8f5897f120ac24d20b42c">   86</a></span>    <span class="keyword">public</span> ReservaDTO <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#af96c6fcc8eb8f5897f120ac24d20b42c">BuscarReservasByIdAndClienteId</a>(Long bookingId, Long clienteId) {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        Reserva booking = repoReserva.findBookingByIdAndClienteId(bookingId, clienteId)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                .orElseThrow(() -&gt; <span class="keyword">new</span> EntityNotFoundException(<span class="stringliteral">&quot;Reserva no encontrada con ID:&quot;</span> + bookingId));</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a66efb0bcc1cbf7b3796fe11f05329a99">mapReservaModelToReservaDto</a>(booking);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    @Override</div>
+<div class="foldopen" id="foldopen00093" data-start="{" data-end="}">
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a4688a09ac88049a13ea36944dad52652">   93</a></span>    <span class="keyword">public</span> List&lt;ReservaDTO&gt; <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a4688a09ac88049a13ea36944dad52652">buscarReservasByManagerId</a>(Long managerId) {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        List&lt;Hotel&gt; hotels = servicioHotel.buscarTodosHotelesByManagerId(managerId);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">return</span> hotels.stream()</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                .flatMap(hotel -&gt; repoReserva.findBookingsByHotelId(hotel.getId()).stream())</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                .map(this::mapReservaModelToReservaDto)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                .collect(Collectors.toList());</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    @Override</div>
+<div class="foldopen" id="foldopen00102" data-start="{" data-end="}">
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a7253a0c2c681eeaa87a3e6135059167e">  102</a></span>    <span class="keyword">public</span> ReservaDTO <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a7253a0c2c681eeaa87a3e6135059167e">buscarReservaByIdAndManagerId</a>(Long bookingId, Long managerId) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        Reserva reserva = repoReserva.findBookingByIdAndHotel_HotelManagerId(bookingId, managerId)</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                .orElseThrow(() -&gt; <span class="keyword">new</span> EntityNotFoundException(<span class="stringliteral">&quot;Reserva no encontrada con ID: &quot;</span> + bookingId + <span class="stringliteral">&quot; Y manager ID: &quot;</span> + managerId));</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a66efb0bcc1cbf7b3796fe11f05329a99">mapReservaModelToReservaDto</a>(reserva);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    }</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keyword">private</span> <span class="keywordtype">void</span> validateBookingDates(LocalDate checkinDate, LocalDate checkoutDate) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">if</span> (checkinDate.isBefore(LocalDate.now())) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="stringliteral">&quot;La fecha de check in no puede estar en pasado&quot;</span>);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">if</span> (checkoutDate.isBefore(checkinDate.plusDays(1))) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="stringliteral">&quot;La fecha de check out debe ser posterior a la de check in.&quot;</span>);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    @Override</div>
+<div class="foldopen" id="foldopen00118" data-start="{" data-end="}">
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a66efb0bcc1cbf7b3796fe11f05329a99">  118</a></span>    <span class="keyword">public</span> ReservaDTO <a class="code hl_function" href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a66efb0bcc1cbf7b3796fe11f05329a99">mapReservaModelToReservaDto</a>(Reserva reserva) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        DireccionDTO addressDto = DireccionDTO.builder()</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                .lineaDireccion(reserva.getHotel().getDireccion().getLineaDireccion())</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                .ciudad(reserva.getHotel().getDireccion().getCiudad())</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                .pais(reserva.getHotel().getDireccion().getPais())</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                .build();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        List&lt;HabitacionSeleccionDTO&gt; roomSelections = reserva.getHabitacionReservadas().stream()</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                .map(habitacion -&gt; HabitacionSeleccionDTO.builder()</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                        .tipoHabitacion(habitacion.getTipoHabitacion())</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                        .contar(habitacion.getContar())</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                        .build())</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                .collect(Collectors.toList());</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        Usuario customerUser = reserva.getCliente().getUsuario();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">return</span> ReservaDTO.builder()</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                .id(reserva.getId())</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                .numeroConfirmacion(reserva.getNumeroConfirmacion())</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                .fechaReserva(reserva.getFechaReserva())</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                .clienteId(reserva.getCliente().getId())</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                .hotelId(reserva.getHotel().getId())</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                .fechaCheckIn(reserva.getFechaCheckIn())</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                .fechaCheckOut(reserva.getFechaCheckOut())</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                .seleccionesHabitacion(roomSelections)</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                .precioTotal(reserva.getPago().getPrecioTotal())</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                .nombreHotel(reserva.getHotel().getNombre())</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                .direccionHotel(addressDto)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                .nombreCliente(customerUser.getNombre() + <span class="stringliteral">&quot; &quot;</span> + customerUser.getApellido())</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                .emailCliente(customerUser.getUsername())</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                .estadoPago(reserva.getPago().getEstadoPago())</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                .metodoPago(reserva.getPago().getMetodoPago())</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                .build();</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    }</div>
+</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keyword">private</span> Reserva mapBookingInitDtoToBookingModel(InicioReservaDTO inicioReservaDTO, Cliente cliente, Hotel hotel) {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        Reserva reserva = Reserva.builder()</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                .cliente(cliente)</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                .hotel(hotel)</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                .fechaCheckIn(inicioReservaDTO.getFechaCheckIn())</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                .fechaCheckOut(inicioReservaDTO.getFechaCheckOut())</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                .build();</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordflow">for</span> (HabitacionSeleccionDTO roomSelection : inicioReservaDTO.getHabitacionSelecciones()) {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            <span class="keywordflow">if</span> (roomSelection.getContar() &gt; 0) {</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                HabitacionReservada habitacionReservada = HabitacionReservada.builder()</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                        .reserva(reserva)</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                        .tipoHabitacion(roomSelection.getTipoHabitacion())</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                        .contar(roomSelection.getContar())</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                        .build();</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                reserva.getHabitacionReservadas().add(habitacionReservada);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>            }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordflow">return</span> reserva;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>}</div>
+</div>
+<div class="ttc" id="aclasses_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_html"><div class="ttname"><a href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html">es.deusto.bilboHotels.service.impl.ServicioReservaImpl</a></div><div class="ttdef"><b>Definition</b> <a href="#l00024">ServicioReservaImpl.java:24</a></div></div>
+<div class="ttc" id="aclasses_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_html_a02be6d4789ca5a013432ab3c706fafc6"><div class="ttname"><a href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a02be6d4789ca5a013432ab3c706fafc6">es.deusto.bilboHotels.service.impl.ServicioReservaImpl.buscarReservasByClienteId</a></div><div class="ttdeci">List&lt; ReservaDTO &gt; buscarReservasByClienteId(Long clienteId)</div><div class="ttdef"><b>Definition</b> <a href="#l00077">ServicioReservaImpl.java:77</a></div></div>
+<div class="ttc" id="aclasses_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_html_a4688a09ac88049a13ea36944dad52652"><div class="ttname"><a href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a4688a09ac88049a13ea36944dad52652">es.deusto.bilboHotels.service.impl.ServicioReservaImpl.buscarReservasByManagerId</a></div><div class="ttdeci">List&lt; ReservaDTO &gt; buscarReservasByManagerId(Long managerId)</div><div class="ttdef"><b>Definition</b> <a href="#l00093">ServicioReservaImpl.java:93</a></div></div>
+<div class="ttc" id="aclasses_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_html_a4efa8a825c07c893c9c3022313965f0d"><div class="ttname"><a href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a4efa8a825c07c893c9c3022313965f0d">es.deusto.bilboHotels.service.impl.ServicioReservaImpl.buscarReservaById</a></div><div class="ttdeci">ReservaDTO buscarReservaById(Long reservaId)</div><div class="ttdef"><b>Definition</b> <a href="#l00070">ServicioReservaImpl.java:70</a></div></div>
+<div class="ttc" id="aclasses_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_html_a66efb0bcc1cbf7b3796fe11f05329a99"><div class="ttname"><a href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a66efb0bcc1cbf7b3796fe11f05329a99">es.deusto.bilboHotels.service.impl.ServicioReservaImpl.mapReservaModelToReservaDto</a></div><div class="ttdeci">ReservaDTO mapReservaModelToReservaDto(Reserva reserva)</div><div class="ttdef"><b>Definition</b> <a href="#l00118">ServicioReservaImpl.java:118</a></div></div>
+<div class="ttc" id="aclasses_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_html_a7253a0c2c681eeaa87a3e6135059167e"><div class="ttname"><a href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a7253a0c2c681eeaa87a3e6135059167e">es.deusto.bilboHotels.service.impl.ServicioReservaImpl.buscarReservaByIdAndManagerId</a></div><div class="ttdeci">ReservaDTO buscarReservaByIdAndManagerId(Long bookingId, Long managerId)</div><div class="ttdef"><b>Definition</b> <a href="#l00102">ServicioReservaImpl.java:102</a></div></div>
+<div class="ttc" id="aclasses_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_html_a9a071a6c3e91640d0e8f7e86b9ba63c7"><div class="ttname"><a href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#a9a071a6c3e91640d0e8f7e86b9ba63c7">es.deusto.bilboHotels.service.impl.ServicioReservaImpl.confirmarReserva</a></div><div class="ttdeci">ReservaDTO confirmarReserva(InicioReservaDTO inicioReservaDTO, Long clienteId)</div><div class="ttdef"><b>Definition</b> <a href="#l00051">ServicioReservaImpl.java:51</a></div></div>
+<div class="ttc" id="aclasses_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_html_aa7440bc41638bef7aea22c7d2af4ffd0"><div class="ttname"><a href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#aa7440bc41638bef7aea22c7d2af4ffd0">es.deusto.bilboHotels.service.impl.ServicioReservaImpl.buscarAllReservas</a></div><div class="ttdeci">List&lt; ReservaDTO &gt; buscarAllReservas()</div><div class="ttdef"><b>Definition</b> <a href="#l00062">ServicioReservaImpl.java:62</a></div></div>
+<div class="ttc" id="aclasses_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_html_ac5f8602b5ad99b0efd15a3eee2c46d8f"><div class="ttname"><a href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#ac5f8602b5ad99b0efd15a3eee2c46d8f">es.deusto.bilboHotels.service.impl.ServicioReservaImpl.saveBooking</a></div><div class="ttdeci">Reserva saveBooking(InicioReservaDTO bookingInitiationDTO, Long usuarioId)</div><div class="ttdef"><b>Definition</b> <a href="#l00035">ServicioReservaImpl.java:35</a></div></div>
+<div class="ttc" id="aclasses_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_html_af96c6fcc8eb8f5897f120ac24d20b42c"><div class="ttname"><a href="classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl.html#af96c6fcc8eb8f5897f120ac24d20b42c">es.deusto.bilboHotels.service.impl.ServicioReservaImpl.BuscarReservasByIdAndClienteId</a></div><div class="ttdeci">ReservaDTO BuscarReservasByIdAndClienteId(Long bookingId, Long clienteId)</div><div class="ttdef"><b>Definition</b> <a href="#l00086">ServicioReservaImpl.java:86</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

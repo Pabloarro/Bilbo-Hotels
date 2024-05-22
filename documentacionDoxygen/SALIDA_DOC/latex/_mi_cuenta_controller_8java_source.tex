@@ -1,0 +1,105 @@
+\doxysection{Mi\+Cuenta\+Controller.\+java}
+\hypertarget{_mi_cuenta_controller_8java_source}{}\label{_mi_cuenta_controller_8java_source}\index{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/controller/MiCuentaController.java@{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/controller/MiCuentaController.java}}
+\mbox{\hyperlink{_mi_cuenta_controller_8java}{Ir a la documentación de este archivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00001}00001\ \textcolor{keyword}{package\ }es.deusto.bilboHotels.controller;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00003}00003\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.exception.NombreUsuarioYaExisteException;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00004}00004\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.UsuarioDTO;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00005}00005\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.service.ServicioUsuario;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00006}00006\ \textcolor{keyword}{import}\ jakarta.validation.Valid;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00007}00007\ \textcolor{keyword}{import}\ lombok.RequiredArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00008}00008\ \textcolor{keyword}{import}\ lombok.extern.slf4j.Slf4j;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00009}00009\ \textcolor{keyword}{import}\ org.springframework.security.core.Authentication;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00010}00010\ \textcolor{keyword}{import}\ org.springframework.security.core.context.SecurityContextHolder;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.stereotype.Controller;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.ui.Model;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.validation.BindingResult;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.GetMapping;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.ModelAttribute;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00016}00016\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PostMapping;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00018}00018\ @Controller}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00019}00019\ @RequiredArgsConstructor}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00020}00020\ @Slf4j}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00021}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller}{00021}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller}{MiCuentaController}}\ \{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ ServicioUsuario\ servicioUsuario;}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00025}00025\ \ \ \ \ \textcolor{comment}{//\ Customer\ actions}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00026}00026\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/customer/account"{}})}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00027}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_a735e326543aa0f3c2d9cd7a31df28c23}{00027}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_a735e326543aa0f3c2d9cd7a31df28c23}{showCustomerAccount}}(Model\ model)\{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Mostrando\ la\ cuenta\ del\ cliente"{}});}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ añadirDatosDeUsuarioConectadoToModel(model);}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}customer/account"{}};}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00033}00033\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/customer/account/edit"{}})}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00034}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_a4dfa92511e1002b2c11935f18eac086a}{00034}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_a4dfa92511e1002b2c11935f18eac086a}{showCustomerEditForm}}(Model\ model)\{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Mostrando\ el\ formulario\ de\ edición\ de\ la\ cuenta\ del\ cliente"{}});}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ añadirDatosDeUsuarioConectadoToModel(model);}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}customer/account-\/edit"{}};}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00040}00040\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/customer/account/edit"{}})}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00041}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_adf125b7d20cdb076b0d3a6681359d16c}{00041}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_adf125b7d20cdb076b0d3a6681359d16c}{editarCuentaCliente}}(@Valid\ @ModelAttribute("{}usuario"{})\ UsuarioDTO\ usuarioDTO,\ BindingResult\ result)\ \{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Intentando\ editar\ los\ detalles\ de\ la\ cuenta\ del\ cliente\ con\ ID:\ \{\}"{}},\ usuarioDTO.getId());}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.hasErrors())\ \{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ log.warn(\textcolor{stringliteral}{"{}Se\ produjeron\ errores\ de\ validación\ al\ editar\ la\ cuenta\ del\ cliente."{}});}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}customer/account-\/edit"{}};}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ servicioUsuario.actualizarUsuarioLoggeado(usuarioDTO);}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}La\ cuenta\ del\ cliente\ se\ ha\ editado\ correctamente."{}});}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (NombreUsuarioYaExisteException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}Error:\ El\ nombre\ de\ usuario\ ya\ existe."{}},\ e);}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ result.rejectValue(\textcolor{stringliteral}{"{}username"{}},\ \textcolor{stringliteral}{"{}user.exists"{}},\ \textcolor{stringliteral}{"{}Nombre\ de\ usuario\ ya\ registrado!"{}});}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}customer/account-\/edit"{}};}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/customer/account?success"{}};}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00058}00058\ \ \ \ \ \textcolor{comment}{//\ Hotel\ Manager\ actions}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00059}00059\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/manager/account"{}})}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00060}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_a7f33e7e592a90afc3c0e505549b1d332}{00060}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_a7f33e7e592a90afc3c0e505549b1d332}{mostrarCuentaManagerHotel}}(Model\ model)\{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Mostrando\ la\ cuenta\ del\ manager\ del\ hotel"{}});}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ añadirDatosDeUsuarioConectadoToModel(model);}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}hotelmanager/account"{}};}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00066}00066\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/manager/account/edit"{}})}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00067}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_a3b3722cc8cc119eb4f3fa451e68f33b6}{00067}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_a3b3722cc8cc119eb4f3fa451e68f33b6}{MostrarFormularioEdicionManagerhotel}}(Model\ model)\{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Mostrando\ el\ formulario\ de\ edición\ de\ la\ cuenta\ del\ manager\ del\ hotel"{}});}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ añadirDatosDeUsuarioConectadoToModel(model);}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}hotelmanager/account-\/edit"{}};}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00071}00071\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00073}00073\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/manager/account/edit"{}})}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00074}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_ad51bcfa4437a68c7d850aed70721d5fe}{00074}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_mi_cuenta_controller_ad51bcfa4437a68c7d850aed70721d5fe}{editarCuentaHotelManager}}(@Valid\ @ModelAttribute("{}usuario"{})\ UsuarioDTO\ usuarioDTO,\ BindingResult\ result)\ \{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Intentando\ editar\ los\ detalles\ de\ la\ cuenta\ del\ manager\ del\ hotel\ para\ el\ ID:\ \{\}"{}},\ usuarioDTO.getId());}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.hasErrors())\ \{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ log.warn(\textcolor{stringliteral}{"{}Se\ produjeron\ errores\ de\ validación\ al\ editar\ la\ cuenta\ del\ gerente\ del\ hotel."{}});}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}hotelmanager/account-\/edit"{}};}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ servicioUsuario.actualizarUsuarioLoggeado(usuarioDTO);}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Se\ ha\ editado\ exitosamente\ la\ cuenta\ del\ gerente\ del\ hotel."{}});}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (NombreUsuarioYaExisteException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}Error:\ El\ nombre\ de\ usuario\ ya\ existe."{}},\ e);}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ result.rejectValue(\textcolor{stringliteral}{"{}username"{}},\ \textcolor{stringliteral}{"{}usuario.exists"{}},\ \textcolor{stringliteral}{"{}Nombre\ usuario\ ya\ registrado!"{}});}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}hotelmanager/account-\/edit"{}};}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/manager/account?success"{}};}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00089}00089\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00091}00091\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ añadirDatosDeUsuarioConectadoToModel(Model\ model)\ \{}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ Authentication\ auth\ =\ SecurityContextHolder.getContext().getAuthentication();}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ String\ username\ =\ auth.getName();}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ UsuarioDTO\ usuarioDTO\ =\ servicioUsuario.buscarUsuarioDTOByUsername(username);}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Agregando\ los\ datos\ del\ usuario\ conectado\ al\ modelo\ para\ el\ ID\ de\ usuario:\ \{\}"{}},\ usuarioDTO.getId());}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}usuario"{}},\ usuarioDTO);}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00097}00097\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_mi_cuenta_controller_8java_source_l00099}00099\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.11.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bilbo-hotels: Archivo de código fuente C:/Users/pabloA/Bilbo-Hotels/src/main/java/es/deusto/bilboHotels/repository/RepoHotel.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bilbo-hotels<span id="projectnumber">&#160;1</span>
+   </div>
+   <div id="projectbrief">Hoteles bilbao</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fd3f6763802dee1ad875f6c80eac0bda.html">java</a></li><li class="navelem"><a class="el" href="dir_f9b1e2a59d62d001356ff527358589e3.html">es</a></li><li class="navelem"><a class="el" href="dir_218602b84a76f1dba535b3f8d119ec0a.html">deusto</a></li><li class="navelem"><a class="el" href="dir_4f7773f84f9f9111f837ca3298bc6c62.html">bilboHotels</a></li><li class="navelem"><a class="el" href="dir_ed43f6db7ec9200feb7897720217c5d5.html">repository</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">RepoHotel.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_repo_hotel_8java.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>es.deusto.bilboHotels.repository;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> es.deusto.bilboHotels.model.Hotel;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> org.springframework.data.jpa.repository.Query;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> org.springframework.data.repository.query.Param;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> org.springframework.stereotype.Repository;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">import</span> java.time.LocalDate;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> java.util.List;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> java.util.Optional;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>@Repository</div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html">   14</a></span><span class="keyword">public</span> <span class="keyword">interface </span><a class="code hl_interface" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html">RepoHotel</a> <span class="keyword">extends</span> JpaRepository&lt;Hotel, Long&gt; {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a45dc826dcb427bdfbad30a7e618ce9f5">   16</a></span>    Optional&lt;Hotel&gt; <a class="code hl_function" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a45dc826dcb427bdfbad30a7e618ce9f5">findByNombre</a>(String nombre);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a3bb0c9f70265df2af83ce8fa2c7de189">   18</a></span>    List&lt;Hotel&gt; <a class="code hl_function" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a3bb0c9f70265df2af83ce8fa2c7de189">findAllByHotelManager_Id</a>(Long <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#ab0c5e656fde4f5668f25347db81b821d">   20</a></span>    Optional&lt;Hotel&gt; <a class="code hl_function" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#ab0c5e656fde4f5668f25347db81b821d">findByIdAndHotelManager_Id</a>(Long <span class="keywordtype">id</span>, Long managerId);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    @Query(<span class="stringliteral">&quot;SELECT h FROM Hotel h WHERE h.direccion.ciudad = :ciudad&quot;</span>)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a88a85922fc836f9441f1d9795e958926">   23</a></span>    List&lt;Hotel&gt; <a class="code hl_function" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a88a85922fc836f9441f1d9795e958926">findHotelsByCity</a>(@Param(&quot;ciudad&quot;) String ciudad);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    @Query(&quot;SELECT h &quot; +</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            &quot;FROM Hotel h &quot; +</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            &quot;JOIN h.habitaciones r &quot; +</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            &quot;LEFT JOIN Disponibilidad a ON a.habitacion.<span class="keywordtype">id</span> = r.<span class="keywordtype">id</span> &quot; +</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            &quot;AND a.fecha &gt;= :fechaCheckIn AND a.fecha &lt; :fechaCheckOut &quot; +</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            &quot;WHERE h.direccion.ciudad = :ciudad &quot; +</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            &quot;AND (a IS NULL OR a.habitacionesDisponibles &gt; 0) &quot; +</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            &quot;GROUP BY h.<span class="keywordtype">id</span>, r.<span class="keywordtype">id</span> &quot; +</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            &quot;HAVING COUNT(DISTINCT a.fecha) + SUM(CASE WHEN a IS NULL THEN 1 ELSE 0 END) = :numberOfDays&quot;)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#acb6c7d0f18ce8cf18bd8189f64ae2a4f">   34</a></span>    List&lt;Hotel&gt; <a class="code hl_function" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#acb6c7d0f18ce8cf18bd8189f64ae2a4f">findHotelsWithAvailableRooms</a>(@Param(&quot;ciudad&quot;) String city,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                                             @Param(&quot;fechaCheckIn&quot;) LocalDate fechaCheckIn,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                                             @Param(&quot;fechaCheckOut&quot;) LocalDate fechaCheckOut,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                                             @Param(&quot;numberOfDays&quot;) Long numberOfDays);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    @Query(&quot;SELECT h &quot; +</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            &quot;FROM Hotel h &quot; +</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            &quot;WHERE h.direccion.ciudad = :ciudad &quot; +</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            &quot;AND NOT EXISTS (&quot; +</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            &quot;   SELECT 1 &quot; +</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            &quot;   FROM Disponibilidad a &quot; +</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            &quot;   WHERE a.habitacion.hotel.<span class="keywordtype">id</span> = h.<span class="keywordtype">id</span> &quot; +</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            &quot;   AND a.fecha &gt;= :fechaCheckIn AND a.fecha &lt; :fechaCheckOut&quot; +</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            &quot;)&quot;)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a9acfc4d5e1771ef91b38e0c3a234f197">   48</a></span>    List&lt;Hotel&gt; <a class="code hl_function" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a9acfc4d5e1771ef91b38e0c3a234f197">findHotelsWithoutAvailabilityRecords</a>(@Param(&quot;ciudad&quot;) String ciudad,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                                                     @Param(&quot;fechaCheckIn&quot;) LocalDate fechaCheckIn,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                                                     @Param(&quot;fechaCheckOut&quot;) LocalDate fechaCheckOut);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    @Query(&quot;SELECT h &quot; +</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            &quot;FROM Hotel h &quot; +</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            &quot;JOIN h.habitaciones r &quot; +</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            &quot;LEFT JOIN Disponibilidad a ON r.<span class="keywordtype">id</span> = a.habitacion.<span class="keywordtype">id</span> &quot; +</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            &quot;AND a.fecha &gt;= :fechaCheckIn AND a.fecha &lt; :fechaCheckOut &quot; +</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            &quot;WHERE h.direccion.ciudad = :ciudad &quot; +</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            &quot;AND (a IS NULL OR a.habitacionesDisponibles &gt; 0) &quot; +</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            &quot;GROUP BY h.<span class="keywordtype">id</span> &quot; +</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            &quot;HAVING COUNT(DISTINCT a.fecha) &lt; :numberOfDays &quot; +</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            &quot;AND COUNT(DISTINCT CASE WHEN a.habitacionesDisponibles &gt; 0 THEN a.fecha END) &gt; 0&quot;)</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a32545599ee314d2d8acca7e72b5b7619">   62</a></span>    List&lt;Hotel&gt; <a class="code hl_function" href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a32545599ee314d2d8acca7e72b5b7619">findHotelsWithPartialAvailabilityRecords</a>(@Param(&quot;ciudad&quot;) String ciudad,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                                                         @Param(&quot;fechaCheckIn&quot;) LocalDate fechaCheckIn,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                                                         @Param(&quot;fechaCheckOut&quot;) LocalDate fechaCheckOut,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                                                         @Param(&quot;numberOfDays&quot;) Long numberOfDays);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+</div>
+<div class="ttc" id="ainterfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel_html"><div class="ttname"><a href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html">es.deusto.bilboHotels.repository.RepoHotel</a></div><div class="ttdef"><b>Definition</b> <a href="#l00014">RepoHotel.java:14</a></div></div>
+<div class="ttc" id="ainterfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel_html_a32545599ee314d2d8acca7e72b5b7619"><div class="ttname"><a href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a32545599ee314d2d8acca7e72b5b7619">es.deusto.bilboHotels.repository.RepoHotel.findHotelsWithPartialAvailabilityRecords</a></div><div class="ttdeci">List&lt; Hotel &gt; findHotelsWithPartialAvailabilityRecords(@Param(&quot;ciudad&quot;) String ciudad, @Param(&quot;fechaCheckIn&quot;) LocalDate fechaCheckIn, @Param(&quot;fechaCheckOut&quot;) LocalDate fechaCheckOut, @Param(&quot;numberOfDays&quot;) Long numberOfDays)</div></div>
+<div class="ttc" id="ainterfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel_html_a3bb0c9f70265df2af83ce8fa2c7de189"><div class="ttname"><a href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a3bb0c9f70265df2af83ce8fa2c7de189">es.deusto.bilboHotels.repository.RepoHotel.findAllByHotelManager_Id</a></div><div class="ttdeci">List&lt; Hotel &gt; findAllByHotelManager_Id(Long id)</div></div>
+<div class="ttc" id="ainterfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel_html_a45dc826dcb427bdfbad30a7e618ce9f5"><div class="ttname"><a href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a45dc826dcb427bdfbad30a7e618ce9f5">es.deusto.bilboHotels.repository.RepoHotel.findByNombre</a></div><div class="ttdeci">Optional&lt; Hotel &gt; findByNombre(String nombre)</div></div>
+<div class="ttc" id="ainterfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel_html_a88a85922fc836f9441f1d9795e958926"><div class="ttname"><a href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a88a85922fc836f9441f1d9795e958926">es.deusto.bilboHotels.repository.RepoHotel.findHotelsByCity</a></div><div class="ttdeci">List&lt; Hotel &gt; findHotelsByCity(@Param(&quot;ciudad&quot;) String ciudad)</div></div>
+<div class="ttc" id="ainterfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel_html_a9acfc4d5e1771ef91b38e0c3a234f197"><div class="ttname"><a href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#a9acfc4d5e1771ef91b38e0c3a234f197">es.deusto.bilboHotels.repository.RepoHotel.findHotelsWithoutAvailabilityRecords</a></div><div class="ttdeci">List&lt; Hotel &gt; findHotelsWithoutAvailabilityRecords(@Param(&quot;ciudad&quot;) String ciudad, @Param(&quot;fechaCheckIn&quot;) LocalDate fechaCheckIn, @Param(&quot;fechaCheckOut&quot;) LocalDate fechaCheckOut)</div></div>
+<div class="ttc" id="ainterfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel_html_ab0c5e656fde4f5668f25347db81b821d"><div class="ttname"><a href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#ab0c5e656fde4f5668f25347db81b821d">es.deusto.bilboHotels.repository.RepoHotel.findByIdAndHotelManager_Id</a></div><div class="ttdeci">Optional&lt; Hotel &gt; findByIdAndHotelManager_Id(Long id, Long managerId)</div></div>
+<div class="ttc" id="ainterfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel_html_acb6c7d0f18ce8cf18bd8189f64ae2a4f"><div class="ttname"><a href="interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_hotel.html#acb6c7d0f18ce8cf18bd8189f64ae2a4f">es.deusto.bilboHotels.repository.RepoHotel.findHotelsWithAvailableRooms</a></div><div class="ttdeci">List&lt; Hotel &gt; findHotelsWithAvailableRooms(@Param(&quot;ciudad&quot;) String city, @Param(&quot;fechaCheckIn&quot;) LocalDate fechaCheckIn, @Param(&quot;fechaCheckOut&quot;) LocalDate fechaCheckOut, @Param(&quot;numberOfDays&quot;) Long numberOfDays)</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,0 +1,181 @@
+\doxysection{Servicio\+Reserva\+Impl.\+java}
+\hypertarget{_servicio_reserva_impl_8java_source}{}\label{_servicio_reserva_impl_8java_source}\index{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/service/impl/ServicioReservaImpl.java@{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/service/impl/ServicioReservaImpl.java}}
+\mbox{\hyperlink{_servicio_reserva_impl_8java}{Ir a la documentación de este archivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00001}00001\ \textcolor{keyword}{package\ }es.deusto.bilboHotels.service.impl;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00003}00003\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.*;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00004}00004\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.DireccionDTO;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00005}00005\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.ReservaDTO;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00006}00006\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.InicioReservaDTO;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00007}00007\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.HabitacionSeleccionDTO;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00008}00008\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.repository.RepoReserva;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00009}00009\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.service.*;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00010}00010\ \textcolor{keyword}{import}\ jakarta.persistence.EntityNotFoundException;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00011}00011\ \textcolor{keyword}{import}\ jakarta.transaction.Transactional;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00012}00012\ \textcolor{keyword}{import}\ lombok.RequiredArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00013}00013\ \textcolor{keyword}{import}\ lombok.extern.slf4j.Slf4j;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00016}00016\ \textcolor{keyword}{import}\ java.time.LocalDate;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00017}00017\ \textcolor{keyword}{import}\ java.util.Comparator;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00018}00018\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00019}00019\ \textcolor{keyword}{import}\ java.util.stream.Collectors;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00021}00021\ @Service}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00022}00022\ @RequiredArgsConstructor}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00023}00023\ @Slf4j}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00024}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl}{00024}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl}{ServicioReservaImpl}}\ \textcolor{keyword}{implements}\ ServicioReserva\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ RepoReserva\ repoReserva;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ ServicioDisponibilidad\ servicioDisponibilidad;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ ServicioPago\ servicioPago;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ ServicioCliente\ servicioCliente;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ ServicioHotel\ servicioHotel;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00033}00033\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00034}00034\ \ \ \ \ @Transactional}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00035}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_ac5f8602b5ad99b0efd15a3eee2c46d8f}{00035}}\ \ \ \ \ \textcolor{keyword}{public}\ Reserva\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_ac5f8602b5ad99b0efd15a3eee2c46d8f}{saveBooking}}(InicioReservaDTO\ bookingInitiationDTO,\ Long\ usuarioId)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ validateBookingDates(bookingInitiationDTO.getFechaCheckIn(),\ bookingInitiationDTO.getFechaCheckOut());}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ Cliente\ customer\ =\ servicioCliente.buscarByUsuarioId(usuarioId)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ EntityNotFoundException(\textcolor{stringliteral}{"{}Cliente\ no\ encontrado\ con\ ID:\ "{}}\ +\ usuarioId));}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ Hotel\ hotel\ =\ servicioHotel.buscarHotelById(bookingInitiationDTO.getHotelId())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ EntityNotFoundException(\textcolor{stringliteral}{"{}Hotel\ no\ encontrado\ con\ ID:\ "{}}\ +\ bookingInitiationDTO.getHotelId()));}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ Reserva\ booking\ =\ mapBookingInitDtoToBookingModel(bookingInitiationDTO,\ customer,\ hotel);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repoReserva.save(booking);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00049}00049\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00050}00050\ \ \ \ \ @Transactional}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00051}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a9a071a6c3e91640d0e8f7e86b9ba63c7}{00051}}\ \ \ \ \ \textcolor{keyword}{public}\ ReservaDTO\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a9a071a6c3e91640d0e8f7e86b9ba63c7}{confirmarReserva}}(InicioReservaDTO\ inicioReservaDTO,\ Long\ clienteId)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ Reserva\ savedBooking\ =\ this.\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_ac5f8602b5ad99b0efd15a3eee2c46d8f}{saveBooking}}(inicioReservaDTO,\ clienteId);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ Pago\ savedPayment\ =\ servicioPago.savePayment(inicioReservaDTO,\ savedBooking);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ savedBooking.setPago(savedPayment);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ repoReserva.save(savedBooking);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ servicioDisponibilidad.actualizarDisponibilidades(inicioReservaDTO.getHotelId(),\ inicioReservaDTO.getFechaCheckIn(),}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ inicioReservaDTO.getFechaCheckOut(),\ inicioReservaDTO.getHabitacionSelecciones());}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a66efb0bcc1cbf7b3796fe11f05329a99}{mapReservaModelToReservaDto}}(savedBooking);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00061}00061\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00062}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_aa7440bc41638bef7aea22c7d2af4ffd0}{00062}}\ \ \ \ \ \textcolor{keyword}{public}\ List<ReservaDTO>\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_aa7440bc41638bef7aea22c7d2af4ffd0}{buscarAllReservas}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ List<Reserva>\ bookings\ =\ repoReserva.findAll();}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ bookings.stream()}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .map(this::mapReservaModelToReservaDto)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .collect(Collectors.toList());}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00067}00067\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00069}00069\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00070}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a4efa8a825c07c893c9c3022313965f0d}{00070}}\ \ \ \ \ \textcolor{keyword}{public}\ ReservaDTO\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a4efa8a825c07c893c9c3022313965f0d}{buscarReservaById}}(Long\ reservaId)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ Reserva\ reserva\ =\ repoReserva.findById(reservaId)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ EntityNotFoundException(\textcolor{stringliteral}{"{}Reserva\ no\ encontrada\ con\ ID:\ "{}}\ +\ reservaId));}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a66efb0bcc1cbf7b3796fe11f05329a99}{mapReservaModelToReservaDto}}(reserva);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00076}00076\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00077}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a02be6d4789ca5a013432ab3c706fafc6}{00077}}\ \ \ \ \ \textcolor{keyword}{public}\ List<ReservaDTO>\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a02be6d4789ca5a013432ab3c706fafc6}{buscarReservasByClienteId}}(Long\ clienteId)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ List<Reserva>\ bookingDTOs\ =\ repoReserva.findBookingsByClienteId(clienteId);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ bookingDTOs.stream()}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .map(this::mapReservaModelToReservaDto)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .sorted(Comparator.comparing(ReservaDTO::getFechaCheckIn))}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .collect(Collectors.toList());}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00083}00083\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00085}00085\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00086}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_af96c6fcc8eb8f5897f120ac24d20b42c}{00086}}\ \ \ \ \ \textcolor{keyword}{public}\ ReservaDTO\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_af96c6fcc8eb8f5897f120ac24d20b42c}{BuscarReservasByIdAndClienteId}}(Long\ bookingId,\ Long\ clienteId)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ Reserva\ booking\ =\ repoReserva.findBookingByIdAndClienteId(bookingId,\ clienteId)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ EntityNotFoundException(\textcolor{stringliteral}{"{}Reserva\ no\ encontrada\ con\ ID:"{}}\ +\ bookingId));}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a66efb0bcc1cbf7b3796fe11f05329a99}{mapReservaModelToReservaDto}}(booking);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00092}00092\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00093}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a4688a09ac88049a13ea36944dad52652}{00093}}\ \ \ \ \ \textcolor{keyword}{public}\ List<ReservaDTO>\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a4688a09ac88049a13ea36944dad52652}{buscarReservasByManagerId}}(Long\ managerId)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ List<Hotel>\ hotels\ =\ servicioHotel.buscarTodosHotelesByManagerId(managerId);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hotels.stream()}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .flatMap(hotel\ -\/>\ repoReserva.findBookingsByHotelId(hotel.getId()).stream())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .map(this::mapReservaModelToReservaDto)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .collect(Collectors.toList());}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00101}00101\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00102}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a7253a0c2c681eeaa87a3e6135059167e}{00102}}\ \ \ \ \ \textcolor{keyword}{public}\ ReservaDTO\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a7253a0c2c681eeaa87a3e6135059167e}{buscarReservaByIdAndManagerId}}(Long\ bookingId,\ Long\ managerId)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00103}00103\ \ \ \ \ \ \ \ \ Reserva\ reserva\ =\ repoReserva.findBookingByIdAndHotel\_HotelManagerId(bookingId,\ managerId)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ EntityNotFoundException(\textcolor{stringliteral}{"{}Reserva\ no\ encontrada\ con\ ID:\ "{}}\ +\ bookingId\ +\ \textcolor{stringliteral}{"{}\ Y\ manager\ ID:\ "{}}\ +\ managerId));}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a66efb0bcc1cbf7b3796fe11f05329a99}{mapReservaModelToReservaDto}}(reserva);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00106}00106\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00108}00108\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ validateBookingDates(LocalDate\ checkinDate,\ LocalDate\ checkoutDate)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (checkinDate.isBefore(LocalDate.now()))\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}La\ fecha\ de\ check\ in\ no\ puede\ estar\ en\ pasado"{}});}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00111}00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (checkoutDate.isBefore(checkinDate.plusDays(1)))\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}La\ fecha\ de\ check\ out\ debe\ ser\ posterior\ a\ la\ de\ check\ in."{}});}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00114}00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00115}00115\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00117}00117\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00118}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a66efb0bcc1cbf7b3796fe11f05329a99}{00118}}\ \ \ \ \ \textcolor{keyword}{public}\ ReservaDTO\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_reserva_impl_a66efb0bcc1cbf7b3796fe11f05329a99}{mapReservaModelToReservaDto}}(Reserva\ reserva)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00119}00119\ \ \ \ \ \ \ \ \ DireccionDTO\ addressDto\ =\ DireccionDTO.builder()}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .lineaDireccion(reserva.getHotel().getDireccion().getLineaDireccion())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ciudad(reserva.getHotel().getDireccion().getCiudad())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .pais(reserva.getHotel().getDireccion().getPais())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .build();}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00125}00125\ \ \ \ \ \ \ \ \ List<HabitacionSeleccionDTO>\ roomSelections\ =\ reserva.getHabitacionReservadas().stream()}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .map(habitacion\ -\/>\ HabitacionSeleccionDTO.builder()}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .tipoHabitacion(habitacion.getTipoHabitacion())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .contar(habitacion.getContar())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .build())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .collect(Collectors.toList());}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00132}00132\ \ \ \ \ \ \ \ \ Usuario\ customerUser\ =\ reserva.getCliente().getUsuario();}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ReservaDTO.builder()}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .id(reserva.getId())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .numeroConfirmacion(reserva.getNumeroConfirmacion())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .fechaReserva(reserva.getFechaReserva())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .clienteId(reserva.getCliente().getId())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hotelId(reserva.getHotel().getId())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .fechaCheckIn(reserva.getFechaCheckIn())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .fechaCheckOut(reserva.getFechaCheckOut())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .seleccionesHabitacion(roomSelections)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .precioTotal(reserva.getPago().getPrecioTotal())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .nombreHotel(reserva.getHotel().getNombre())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .direccionHotel(addressDto)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .nombreCliente(customerUser.getNombre()\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ customerUser.getApellido())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .emailCliente(customerUser.getUsername())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .estadoPago(reserva.getPago().getEstadoPago())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .metodoPago(reserva.getPago().getMetodoPago())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .build();}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00151}00151\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00153}00153\ \ \ \ \ \textcolor{keyword}{private}\ Reserva\ mapBookingInitDtoToBookingModel(InicioReservaDTO\ inicioReservaDTO,\ Cliente\ cliente,\ Hotel\ hotel)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00154}00154\ \ \ \ \ \ \ \ \ Reserva\ reserva\ =\ Reserva.builder()}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .cliente(cliente)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hotel(hotel)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .fechaCheckIn(inicioReservaDTO.getFechaCheckIn())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .fechaCheckOut(inicioReservaDTO.getFechaCheckOut())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .build();}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00161}00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (HabitacionSeleccionDTO\ roomSelection\ :\ inicioReservaDTO.getHabitacionSelecciones())\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (roomSelection.getContar()\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HabitacionReservada\ habitacionReservada\ =\ HabitacionReservada.builder()}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .reserva(reserva)}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .tipoHabitacion(roomSelection.getTipoHabitacion())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .contar(roomSelection.getContar())}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .build();}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reserva.getHabitacionReservadas().add(habitacionReservada);}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00170}00170\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00172}00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reserva;}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00173}00173\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{_servicio_reserva_impl_8java_source_l00175}00175\ \}}
+
+\end{DoxyCode}

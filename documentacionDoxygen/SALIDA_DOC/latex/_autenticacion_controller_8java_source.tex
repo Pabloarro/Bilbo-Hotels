@@ -1,0 +1,104 @@
+\doxysection{Autenticacion\+Controller.\+java}
+\hypertarget{_autenticacion_controller_8java_source}{}\label{_autenticacion_controller_8java_source}\index{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/controller/AutenticacionController.java@{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/controller/AutenticacionController.java}}
+\mbox{\hyperlink{_autenticacion_controller_8java}{Ir a la documentación de este archivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00001}00001\ \textcolor{keyword}{package\ }es.deusto.bilboHotels.controller;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00003}00003\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.exception.NombreUsuarioYaExisteException;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00004}00004\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.enums.TipoRol;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00005}00005\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.RegistroUsuarioDTO;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00006}00006\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.security.RedirectUtil;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00007}00007\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.service.ServicioUsuario;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00008}00008\ \textcolor{keyword}{import}\ jakarta.validation.Valid;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00009}00009\ \textcolor{keyword}{import}\ lombok.RequiredArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00010}00010\ \textcolor{keyword}{import}\ lombok.extern.slf4j.Slf4j;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.security.core.Authentication;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.stereotype.Controller;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.validation.BindingResult;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.GetMapping;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.ModelAttribute;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00016}00016\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PostMapping;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00018}00018\ @Controller}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00019}00019\ @RequiredArgsConstructor}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00020}00020\ @Slf4j}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00021}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller}{00021}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller}{AutenticacionController}}\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ ServicioUsuario\ servicioUsuario;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00025}00025\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/"{}})}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00026}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_a8f8dc7a0216e8672eb53a5b22a755cc8}{00026}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_a8f8dc7a0216e8672eb53a5b22a755cc8}{paginaInicio}}(Authentication\ authentication)\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ String\ redirect\ =\ getAuthenticatedUserRedirectUrl(authentication);}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (redirect\ !=\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return}\ redirect;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Accediendo\ a\ la\ pagina\ de\ inicio"{}});}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}index"{}};}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00033}00033\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/login"{}})}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00034}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_a7da89297995e6ffcadb8048fe9646090}{00034}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_a7da89297995e6ffcadb8048fe9646090}{paginaLogin}}(Authentication\ authentication)\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ String\ redirect\ =\ getAuthenticatedUserRedirectUrl(authentication);}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (redirect\ !=\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return}\ redirect;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Accediendo\ a\ la\ pagina\ de\ login"{}});}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}login"{}};}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00041}00041\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/register/customer"{}})}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00042}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_a552c69bdb52801f228b9efeb5171533d}{00042}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_a552c69bdb52801f228b9efeb5171533d}{showCustomerRegistrationForm}}(@ModelAttribute("{}usuario"{})\ RegistroUsuarioDTO\ registroDTO,\ Authentication\ authentication)\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ String\ redirect\ =\ getAuthenticatedUserRedirectUrl(authentication);}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (redirect\ !=\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return}\ redirect;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Mostrando\ formulario\ de\ registro\ de\ cliente"{}});}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}register-\/customer"{}};}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00049}00049\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/register/customer"{}})}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00050}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_acec99f7fc9c2c5a504d781bae5f593c1}{00050}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_acec99f7fc9c2c5a504d781bae5f593c1}{registerCustomerAccount}}(@Valid\ @ModelAttribute("{}usuario"{})\ RegistroUsuarioDTO\ registroDTO,\ BindingResult\ result)\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Intentando\ registrar\ la\ cuenta\ del\ cliente.:\ \{\}"{}},\ registroDTO.getUsername());}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ registroDTO.setTipoRol(TipoRol.CLIENTE);}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ registrarUsuario(registroDTO,\ result,\ \textcolor{stringliteral}{"{}register-\/customer"{}},\ \textcolor{stringliteral}{"{}register/customer"{}});}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00056}00056\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/register/manager"{}})}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00057}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_a9576af6df60caadbbf9c26540952cdfd}{00057}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_a9576af6df60caadbbf9c26540952cdfd}{showManagerRegistrationForm}}(@ModelAttribute("{}usuario"{})\ RegistroUsuarioDTO\ registroDTO,\ Authentication\ authentication)\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ String\ redirect\ =\ getAuthenticatedUserRedirectUrl(authentication);}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (redirect\ !=\ \textcolor{keyword}{null})\ \textcolor{keywordflow}{return}\ redirect;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Mostrando\ formulario\ de\ registro\ para\ manager"{}});}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}register-\/manager"{}};}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00064}00064\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/register/manager"{}})}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00065}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_ad68a1314b3296753e0bc2997d289f9d9}{00065}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_autenticacion_controller_ad68a1314b3296753e0bc2997d289f9d9}{registerManagerAccount}}(@Valid\ @ModelAttribute("{}usuario"{})\ RegistroUsuarioDTO\ registroDTO,\ BindingResult\ result)\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Intentanto\ registrar\ la\ cuenta\ del\ manager:\ \{\}"{}},\ registroDTO.getUsername());}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ registroDTO.setTipoRol(TipoRol.HOTEL\_MANAGER);}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ registrarUsuario(registroDTO,\ result,\ \textcolor{stringliteral}{"{}register-\/manager"{}},\ \textcolor{stringliteral}{"{}register/manager"{}});}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00071}00071\ \ \ \ \ \textcolor{keyword}{private}\ String\ registrarUsuario(RegistroUsuarioDTO\ registroDTO,\ BindingResult\ result,\ String\ view,\ String\ redirectUrl)\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.hasErrors())\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ log.warn(\textcolor{stringliteral}{"{}El\ registro\ fallo\ debido\ a\ errores\ de\ validacion:\ \{\}"{}},\ result.getAllErrors());}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ view;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ servicioUsuario.guardarUsuario(registroDTO);}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Registro\ de\ usuario\ exitoso:\ \{\}"{}},\ registroDTO.getUsername());}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (NombreUsuarioYaExisteException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}El\ registro\ ha\ fallado\ porque\ el\ nombre\ de\ usuario\ ya\ existe:\ \{\}"{}},\ e.getMessage());}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ result.rejectValue(\textcolor{stringliteral}{"{}username"{}},\ \textcolor{stringliteral}{"{}user.exists"{}},\ e.getMessage());}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ view;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/"{}}\ +\ redirectUrl\ +\ \textcolor{stringliteral}{"{}?success"{}};}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00087}00087\ \ \ \ \ \textcolor{keyword}{private}\ String\ getAuthenticatedUserRedirectUrl(Authentication\ authentication)\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (authentication\ !=\ \textcolor{keyword}{null}\ \&\&\ authentication.isAuthenticated())\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ String\ redirectUrl\ =\ RedirectUtil.getRedirectUrl(authentication);}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (redirectUrl\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:"{}}\ +\ redirectUrl;}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{_autenticacion_controller_8java_source_l00098}00098\ }
+
+\end{DoxyCode}

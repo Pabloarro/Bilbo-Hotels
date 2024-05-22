@@ -1,0 +1,25 @@
+\doxysection{Repo\+Cliente.\+java}
+\hypertarget{_repo_cliente_8java_source}{}\label{_repo_cliente_8java_source}\index{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/repository/RepoCliente.java@{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/repository/RepoCliente.java}}
+\mbox{\hyperlink{_repo_cliente_8java}{Ir a la documentación de este archivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00001}00001\ \textcolor{keyword}{package\ }es.deusto.bilboHotels.repository;}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00003}00003\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.Cliente;}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.data.jpa.repository.JpaRepository;}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.data.jpa.repository.Query;}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.data.repository.query.Param;}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.stereotype.Repository;}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00011}00011\ @Repository}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00012}\mbox{\hyperlink{interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_cliente}{00012}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{interface\ }\mbox{\hyperlink{interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_cliente}{RepoCliente}}\ \textcolor{keyword}{extends}\ JpaRepository<Cliente,\ Long>\ \{}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00014}\mbox{\hyperlink{interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_cliente_a5c850a1f451d4fef3f9eaaf52beb363f}{00014}}\ \ \ \ \ Optional<Cliente>\ \mbox{\hyperlink{interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_cliente_a5c850a1f451d4fef3f9eaaf52beb363f}{findByUsuarioId}}(Long\ usuarioId);}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00016}00016\ \ \ \ \ @Query(\textcolor{stringliteral}{"{}SELECT\ c\ FROM\ Cliente\ c\ WHERE\ c.usuario.username\ =\ :username"{}})}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00017}\mbox{\hyperlink{interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_cliente_ad7bf08f718c4c5a84b0290f040a1446b}{00017}}\ \ \ \ \ Optional<Cliente>\ \mbox{\hyperlink{interfacees_1_1deusto_1_1bilbo_hotels_1_1repository_1_1_repo_cliente_ad7bf08f718c4c5a84b0290f040a1446b}{findByUsername}}(@Param("{}username"{})\ String\ username);}
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_repo_cliente_8java_source_l00019}00019\ \}}
+
+\end{DoxyCode}

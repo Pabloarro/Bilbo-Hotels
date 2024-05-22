@@ -1,0 +1,43 @@
+\doxysection{Servicio\+Pago\+Impl.\+java}
+\hypertarget{_servicio_pago_impl_8java_source}{}\label{_servicio_pago_impl_8java_source}\index{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/service/impl/ServicioPagoImpl.java@{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/service/impl/ServicioPagoImpl.java}}
+\mbox{\hyperlink{_servicio_pago_impl_8java}{Ir a la documentación de este archivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00001}00001\ \textcolor{keyword}{package\ }es.deusto.bilboHotels.service.impl;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00003}00003\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.Reserva;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00004}00004\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.Pago;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00005}00005\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.InicioReservaDTO;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00006}00006\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.enums.Divisa;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00007}00007\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.enums.MetodoPago;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00008}00008\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.enums.EstadoPago;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00009}00009\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.repository.RepoPago;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00010}00010\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.service.ServicioPago;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00011}00011\ \textcolor{keyword}{import}\ lombok.RequiredArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00012}00012\ \textcolor{keyword}{import}\ lombok.extern.slf4j.Slf4j;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00015}00015\ @Service}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00016}00016\ @RequiredArgsConstructor}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00017}00017\ @Slf4j}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00018}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_pago_impl}{00018}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_pago_impl}{ServicioPagoImpl}}\ \textcolor{keyword}{implements}\ ServicioPago\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ RepoPago\ repoPago;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00022}00022\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00023}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_pago_impl_a4da3856c75144289876fa6000b471f95}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ Pago\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_pago_impl_a4da3856c75144289876fa6000b471f95}{savePayment}}(InicioReservaDTO\ inicioReservaDTO,\ Reserva\ reserva)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ Pago\ payment\ =\ Pago.builder()}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .reserva(reserva)}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .precioTotal(inicioReservaDTO.getPrecioTotal())}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .estadoPago(EstadoPago.COMPLETADO)\ \textcolor{comment}{//\ Assuming\ the\ payment\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .metodoPago(MetodoPago.TARJETA\_CREDITO)\ \textcolor{comment}{//\ Default\ to\ CREDIT\_CARD}}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .divisa(Divisa.USD)\ \textcolor{comment}{//\ Default\ to\ USD}}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .build();}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ Pago\ pagoGuardado\ =\ repoPago.save(payment);}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Pago\ guardado\ con\ ID\ transaccion\ :\ \{\}"{}},\ pagoGuardado.getTransaccionId());}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pagoGuardado;}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_pago_impl_8java_source_l00037}00037\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,127 @@
+\doxysection{Reserva\+Controller.\+java}
+\hypertarget{_reserva_controller_8java_source}{}\label{_reserva_controller_8java_source}\index{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/controller/ReservaController.java@{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/controller/ReservaController.java}}
+\mbox{\hyperlink{_reserva_controller_8java}{Ir a la documentación de este archivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00001}00001\ \textcolor{keyword}{package\ }es.deusto.bilboHotels.controller;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00003}00003\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.*;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00004}00004\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.service.ServicioReserva;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00005}00005\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.service.ServicioHotel;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00006}00006\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.service.ServicioUsuario;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00007}00007\ \textcolor{keyword}{import}\ jakarta.servlet.http.HttpSession;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00008}00008\ \textcolor{keyword}{import}\ jakarta.validation.Valid;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00009}00009\ \textcolor{keyword}{import}\ lombok.RequiredArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00010}00010\ \textcolor{keyword}{import}\ lombok.extern.slf4j.Slf4j;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.security.core.Authentication;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.security.core.context.SecurityContextHolder;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.stereotype.Controller;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.ui.Model;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.validation.BindingResult;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00016}00016\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.GetMapping;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00017}00017\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.ModelAttribute;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00018}00018\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PostMapping;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00019}00019\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RequestMapping;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00020}00020\ \textcolor{keyword}{import}\ org.springframework.web.servlet.mvc.support.RedirectAttributes;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00022}00022\ \textcolor{keyword}{import}\ java.time.LocalDate;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00023}00023\ \textcolor{keyword}{import}\ java.time.temporal.ChronoUnit;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00025}00025\ @Controller}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00026}00026\ @RequestMapping(\textcolor{stringliteral}{"{}/booking"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00027}00027\ @RequiredArgsConstructor}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00028}00028\ @Slf4j}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00029}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_reserva_controller}{00029}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_reserva_controller}{ReservaController}}\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ ServicioHotel\ servicioHotel;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ ServicioUsuario\ servicioUsuario;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ ServicioReserva\ servicioReserva;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00035}00035\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/initiate"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00036}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_reserva_controller_a26cd9ec0bdb06d2b0e80daf6127b5bfc}{00036}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_reserva_controller_a26cd9ec0bdb06d2b0e80daf6127b5bfc}{initiateBooking}}(@ModelAttribute\ InicioReservaDTO\ inicioReservaDTO,\ HttpSession\ session)\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ session.setAttribute(\textcolor{stringliteral}{"{}inicioReservaDTO"{}},\ inicioReservaDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Se\ estableció\ inicioReservaDTO\ en\ la\ sesión:\ \{\}"{}},\ inicioReservaDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/booking/payment"{}};}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00042}00042\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/payment"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00043}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_reserva_controller_a0e7031748996c4887c322c60be20c052}{00043}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_reserva_controller_a0e7031748996c4887c322c60be20c052}{mostrarPaginaPago}}(Model\ model,\ RedirectAttributes\ redirectAttributes,\ HttpSession\ session)\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ InicioReservaDTO\ inicioReservaDTO\ =\ (InicioReservaDTO)\ session.getAttribute(\textcolor{stringliteral}{"{}inicioReservaDTO"{}});}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Se\ ha\ recuperado\ iniciioReservaDTO\ de\ la\ sesión:\ \{\}"{}},\ inicioReservaDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inicioReservaDTO\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ \textcolor{stringliteral}{"{}Tu\ sesión\ ha\ expirado.\ Por\ favor,\ inicia\ una\ nueva\ búsqueda."{}});}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/search"{}};}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ HotelDTO\ hotelDTO\ =\ servicioHotel.buscarHotelDtoById(inicioReservaDTO.getHotelId());}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}inicioReservaDTO"{}},\ inicioReservaDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}hotelDTO"{}},\ hotelDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}tarjetaPagoDTO"{}},\ \textcolor{keyword}{new}\ TarjetaPagoDTO());}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}booking/payment"{}};}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00061}00061\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/payment"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00062}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_reserva_controller_ab7baf42d20a5e97eca1efafbb2f42880}{00062}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_reserva_controller_ab7baf42d20a5e97eca1efafbb2f42880}{confirmBooking}}(@Valid\ @ModelAttribute("{}tarjetaPagoDTO"{})\ TarjetaPagoDTO\ tarjetaPagoDTO,\ BindingResult\ result,\ Model\ model,\ HttpSession\ session,\ RedirectAttributes\ redirectAttributes)\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ InicioReservaDTO\ inicioReservaDTO\ =\ (InicioReservaDTO)\ session.getAttribute(\textcolor{stringliteral}{"{}inicioReservaDTO"{}});}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Se\ ha\ recuperado\ inicioReservaDTO\ de\ la\ sesión\ al\ comienzo\ de\ complete\ reserva.\ \{\}"{}},\ inicioReservaDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inicioReservaDTO\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ \textcolor{stringliteral}{"{}Tu\ sesión\ ha\ expirado.\ Por\ favor,\ inicia\ una\ nueva\ búsqueda."{}});}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/search"{}};}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.hasErrors())\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ log.warn(\textcolor{stringliteral}{"{}Se\ produjeron\ errores\ de\ validación\ al\ completar\ la\ reserva."{}});}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ HotelDTO\ hotelDTO\ =\ servicioHotel.buscarHotelDtoById(inicioReservaDTO.getHotelId());}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}inicioReservaDTO"{}},\ inicioReservaDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}hotelDTO"{}},\ hotelDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}tarjetaPagoDTO"{}},\ tarjetaPagoDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}booking/payment"{}};}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ Long\ userId\ =\ getUsuarioIdLogueado();}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ ReservaDTO\ reservaDTO\ =\ servicioReserva.confirmarReserva(inicioReservaDTO,\ userId);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}reservaDTO"{}},\ reservaDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/booking/confirmation"{}};}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}Ocurrió\ un\ error\ al\ completar\ la\ reserva."{}},\ e);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ \textcolor{stringliteral}{"{}Se\ produjo\ un\ error\ inesperado.\ Por\ favor,\ inténtalo\ de\ nuevo\ más\ tarde."{}});}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/booking/payment"{}};}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00092}00092\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/confirmation"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00093}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_reserva_controller_af5249ce578f43bc0a6b2f09ab09f3d77}{00093}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_reserva_controller_af5249ce578f43bc0a6b2f09ab09f3d77}{mostrarPaginaConfirmacion}}(Model\ model,\ RedirectAttributes\ redirectAttributes)\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Attempt\ to\ retrieve\ the\ bookingDTO\ from\ flash\ attributes}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ ReservaDTO\ reservaDTO\ =\ (ReservaDTO)\ model.asMap().get(\textcolor{stringliteral}{"{}reservaDTO"{}});}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reservaDTO\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ \textcolor{stringliteral}{"{}Tu\ sesión\ ha\ expirado\ o\ el\ proceso\ de\ reserva\ no\ se\ completó\ correctamente.\ Por\ favor,\ inicia\ una\ nueva\ búsqueda"{}});}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/search"{}};}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00100}00100\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00102}00102\ \ \ \ \ \ \ \ \ LocalDate\ fechaCheckIn\ =\ reservaDTO.getFechaCheckIn();}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00103}00103\ \ \ \ \ \ \ \ \ LocalDate\ fechaCheckOut\ =\ reservaDTO.getFechaCheckOut();}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ duracionDias\ =\ ChronoUnit.DAYS.between(fechaCheckIn,\ fechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00106}00106\ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}dias"{}},\ duracionDias);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00107}00107\ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}reservaDTO"{}},\ reservaDTO);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}booking/confirmation"{}};}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00112}00112\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00113}00113\ \ \ \ \ \textcolor{keyword}{private}\ Long\ getUsuarioIdLogueado()\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00114}00114\ \ \ \ \ \ \ \ \ Authentication\ auth\ =\ SecurityContextHolder.getContext().getAuthentication();}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00115}00115\ \ \ \ \ \ \ \ \ String\ username\ =\ auth.getName();}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00116}00116\ \ \ \ \ \ \ \ \ UsuarioDTO\ usuarioDTO\ =\ servicioUsuario.buscarUsuarioDTOByUsername(username);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Se\ recuperó\ el\ ID\ del\ usuario\ conectado:\ \{\}"{}},\ usuarioDTO.getId());}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ usuarioDTO.getId();}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00119}00119\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00121}00121\ \}}
+
+\end{DoxyCode}

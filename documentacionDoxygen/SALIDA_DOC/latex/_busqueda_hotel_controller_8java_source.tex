@@ -1,0 +1,150 @@
+\doxysection{Busqueda\+Hotel\+Controller.\+java}
+\hypertarget{_busqueda_hotel_controller_8java_source}{}\label{_busqueda_hotel_controller_8java_source}\index{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/controller/BusquedaHotelController.java@{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/controller/BusquedaHotelController.java}}
+\mbox{\hyperlink{_busqueda_hotel_controller_8java}{Ir a la documentación de este archivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00001}00001\ \textcolor{keyword}{package\ }es.deusto.bilboHotels.controller;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00003}00003\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.HotelDisponibilidadDTO;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00004}00004\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.HotelBusquedaDTO;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00005}00005\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.service.ServicioBusquedaHotel;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00006}00006\ \textcolor{keyword}{import}\ jakarta.persistence.EntityNotFoundException;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00007}00007\ \textcolor{keyword}{import}\ jakarta.validation.Valid;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00008}00008\ \textcolor{keyword}{import}\ lombok.RequiredArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00009}00009\ \textcolor{keyword}{import}\ lombok.extern.slf4j.Slf4j;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00010}00010\ \textcolor{keyword}{import}\ org.springframework.stereotype.Controller;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.ui.Model;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.validation.BindingResult;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.*;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.web.servlet.mvc.support.RedirectAttributes;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00016}00016\ \textcolor{keyword}{import}\ java.time.LocalDate;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00017}00017\ \textcolor{keyword}{import}\ java.time.format.DateTimeParseException;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00018}00018\ \textcolor{keyword}{import}\ java.time.temporal.ChronoUnit;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00019}00019\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00021}00021\ @Controller}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00022}00022\ @RequiredArgsConstructor}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00023}00023\ @Slf4j}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00024}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_busqueda_hotel_controller}{00024}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_busqueda_hotel_controller}{BusquedaHotelController}}\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ ServicioBusquedaHotel\ servicioBusquedaHotel;}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00028}00028\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/search"{}})}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00029}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_busqueda_hotel_controller_af8301d09105119152aeb9b80d7d2f63f}{00029}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_busqueda_hotel_controller_af8301d09105119152aeb9b80d7d2f63f}{showSearchForm}}(@ModelAttribute("{}hotelBusquedaDTO"{})\ HotelBusquedaDTO\ hotelBusquedaDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}hotelsearch/search"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00034}00034\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/search"{}})}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00035}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_busqueda_hotel_controller_af3a969bed413477f97b0f600586b7d86}{00035}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_busqueda_hotel_controller_af3a969bed413477f97b0f600586b7d86}{findAvailableHotelsByCityAndDate}}(@Valid\ @ModelAttribute("{}hotelBusquedaDTO"{})\ HotelBusquedaDTO\ hotelBusquedaDTO,\ BindingResult\ result)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.hasErrors())\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}hotelsearch/search"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ validateFechasCheckinYCheckout(hotelBusquedaDTO.getFechaCheckIn(),\ hotelBusquedaDTO.getFechaCheckOut());}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ result.rejectValue(\textcolor{stringliteral}{"{}checkoutDate"{}},\ \textcolor{keyword}{null},\ e.getMessage());}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}hotelsearch/search"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Redirect\ to\ a\ new\ GET\ endpoint\ with\ parameters\ for\ data\ fetching.\ Allows\ page\ refreshing}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ String.format(\textcolor{stringliteral}{"{}redirect:/search-\/results?ciudad=\%s\&fechaCheckIn=\%s\&fechaCheckOut=\%s"{}},\ hotelBusquedaDTO.getCiudad(),\ hotelBusquedaDTO.getFechaCheckIn(),\ hotelBusquedaDTO.getFechaCheckOut());}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00048}00048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00050}00050\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/search-\/results"{}})}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00051}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_busqueda_hotel_controller_af72ef0e0bda2ae5055e3eee2c986cea2}{00051}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_busqueda_hotel_controller_af72ef0e0bda2ae5055e3eee2c986cea2}{showSearchResults}}(@RequestParam\ String\ ciudad,\ @RequestParam\ String\ fechaCheckIn,\ @RequestParam\ String\ fechaCheckOut,\ Model\ model,\ RedirectAttributes\ redirectAttributes)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ LocalDate\ parsedFechaCheckIn\ =\ LocalDate.parse(fechaCheckIn);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ LocalDate\ parsedFechaCheckOut\ =\ LocalDate.parse(fechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ validateFechasCheckinYCheckout(parsedFechaCheckIn,\ parsedFechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Buscando\ hoteles\ para\ la\ ciudad\ \{\}\ entre\ las\ fechas\ \{\}\ y\ \{\}."{}},\ ciudad,\ fechaCheckIn,\ fechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ List<HotelDisponibilidadDTO>\ hotels\ =\ servicioBusquedaHotel.buscarHotelesDisponiblesByCiudadAndFecha(ciudad,\ parsedFechaCheckIn,\ parsedFechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hotels.isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}noHotelsFound"{}},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ duracionDias\ =\ ChronoUnit.DAYS.between(parsedFechaCheckIn,\ parsedFechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}hotels"{}},\ hotels);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}ciuad"{}},\ ciudad);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}dias"{}},\ duracionDias);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}fechaCheckIn"{}},\ fechaCheckIn);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}fechaCheckOut"{}},\ fechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (DateTimeParseException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}Se\ proporcionó\ un\ formato\ de\ fecha\ no\ válido\ para\ la\ búsqueda\ en\ la\ URL."{}},\ e);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ \textcolor{stringliteral}{"{}Formato\ de\ fecha\ no\ válido.\ Por\ favor,\ utiliza\ el\ formulario\ de\ búsqueda."{}});}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/search"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}Se\ proporcionaron\ argumentos\ no\ válidos\ para\ la\ búsqueda\ en\ la\ URL"{}},\ e);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ e.getMessage());}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/search"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}Se\ produjo\ un\ error\ al\ buscar\ hoteles."{}},\ e);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ \textcolor{stringliteral}{"{}Ocurrió\ un\ error\ inesperado.\ Por\ favor,\ inténtalo\ de\ nuevo\ más\ tarde."{}});}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/search"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}hotelsearch/search-\/results"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00088}00088\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00090}00090\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/hotel-\/details/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00091}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_busqueda_hotel_controller_a55f5eb29a35c522428536518e1aa5374}{00091}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1controller_1_1_busqueda_hotel_controller_a55f5eb29a35c522428536518e1aa5374}{showHotelDetails}}(@PathVariable\ Long\ \textcolor{keywordtype}{id},\ @RequestParam\ String\ fechaCheckIn,\ @RequestParam\ String\ fechaCheckOut,\ Model\ model,\ RedirectAttributes\ redirectAttributes)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ LocalDate\ parsedFechaCheckIn\ =\ LocalDate.parse(fechaCheckIn);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ LocalDate\ parsedFechaCheckOut\ =\ LocalDate.parse(fechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ validateFechasCheckinYCheckout(parsedFechaCheckIn,\ parsedFechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ HotelDisponibilidadDTO\ hotelDisponibilidadDTO\ =\ servicioBusquedaHotel.buscarHotelDisponibleById(\textcolor{keywordtype}{id},\ parsedFechaCheckIn,\ parsedFechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ duracionDias\ =\ ChronoUnit.DAYS.between(parsedFechaCheckIn,\ parsedFechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}hotel"{}},\ hotelDisponibilidadDTO);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}duracionDias"{}},\ duracionDias);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}fechaCheckIn"{}},\ fechaCheckIn);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}fechaCheckOut"{}},\ fechaCheckOut);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}hotelsearch/hotel-\/details"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00110}00110\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (DateTimeParseException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}Se\ proporcionó\ un\ formato\ de\ fecha\ no\ válido."{}},\ e);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ \textcolor{stringliteral}{"{}Formato\ de\ fecha\ no\ válido.\ Por\ favor,\ utiliza\ el\ formulario\ de\ búsqueda."{}});}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/search"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00114}00114\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}Se\ proporcionaron\ argumentos\ no\ válidos\ para\ la\ búsqueda\ en\ la\ URL."{}},\ e);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ e.getMessage());}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/search"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00118}00118\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (EntityNotFoundException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}No\ se\ encontró\ ningún\ hotel\ con\ el\ ID\ \{\}."{}},\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ \textcolor{stringliteral}{"{}El\ hotel\ seleccionado\ ya\ no\ está\ disponible.\ Por\ favor,\ inicia\ una\ nueva\ búsqueda."{}});}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/search"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00122}00122\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}Se\ produjo\ un\ error\ al\ buscar\ hoteles."{}},\ e);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ \textcolor{stringliteral}{"{}Se\ ha\ producido\ un\ error\ inesperado.\ Por\ favor,\ inténtalo\ de\ nuevo\ más\ tarde."{}});}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/search"{}};}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00126}00126\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00127}00127\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00129}00129\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ validateFechasCheckinYCheckout(LocalDate\ fechaCheckIn,\ LocalDate\ checkoutDate)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fechaCheckIn.isBefore(LocalDate.now()))\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}La\ fecha\ de\ entrada\ no\ puede\ estar\ en\ el\ pasado."{}});}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00132}00132\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (checkoutDate.isBefore(fechaCheckIn.plusDays(1)))\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}La\ fecha\ de\ salida\ debe\ ser\ posterior\ a\ la\ fecha\ de\ entrada."{}});}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00135}00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00138}00138\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ parseAndValidateBookingDates(String\ fechaCheckIn,\ String\ checkoutDate)\ \{}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00139}00139\ \ \ \ \ \ \ \ \ LocalDate\ parsedfechaCheckIn\ =\ LocalDate.parse(fechaCheckIn);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00140}00140\ \ \ \ \ \ \ \ \ LocalDate\ parsedCheckoutDate\ =\ LocalDate.parse(checkoutDate);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00141}00141\ \ \ \ \ \ \ \ \ validateFechasCheckinYCheckout(parsedfechaCheckIn,\ parsedCheckoutDate);}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00142}00142\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_busqueda_hotel_controller_8java_source_l00144}00144\ \}}
+
+\end{DoxyCode}

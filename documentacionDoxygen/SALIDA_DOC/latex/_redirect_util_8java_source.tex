@@ -1,0 +1,30 @@
+\doxysection{Redirect\+Util.\+java}
+\hypertarget{_redirect_util_8java_source}{}\label{_redirect_util_8java_source}\index{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/security/RedirectUtil.java@{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/security/RedirectUtil.java}}
+\mbox{\hyperlink{_redirect_util_8java}{Ir a la documentación de este archivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00001}00001\ \textcolor{keyword}{package\ }es.deusto.bilboHotels.security;}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00003}00003\ \textcolor{keyword}{import}\ org.springframework.security.core.Authentication;}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.security.core.GrantedAuthority;}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00006}00006\ \textcolor{keyword}{import}\ java.util.Collection;}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00008}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1security_1_1_redirect_util}{00008}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1security_1_1_redirect_util}{RedirectUtil}}\ \{}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00010}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1security_1_1_redirect_util_a0d77635ddc1d6061fc6d1b3cc39208b4}{00010}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ String\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1security_1_1_redirect_util_a0d77635ddc1d6061fc6d1b3cc39208b4}{getRedirectUrl}}(Authentication\ authentication)\ \{}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00011}00011\ \ \ \ \ \ \ \ \ Collection<?\ extends\ GrantedAuthority>\ authorities\ =\ authentication.getAuthorities();}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00012}00012\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (GrantedAuthority\ grantedAuthority\ :\ authorities)\ \{}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (grantedAuthority.getAuthority().equals(\textcolor{stringliteral}{"{}ROL\_ADMIN"{}}))\ \{}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00014}00014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}/admin/dashboard"{}};}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (grantedAuthority.getAuthority().equals(\textcolor{stringliteral}{"{}ROL\_CLIENTE"{}}))\ \{}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}/search"{}};}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (grantedAuthority.getAuthority().equals(\textcolor{stringliteral}{"{}ROL\_HOTEL\_MANAGER"{}}))\ \{}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}/manager/dashboard"{}};}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00020}00020\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_redirect_util_8java_source_l00024}00024\ \}}
+
+\end{DoxyCode}

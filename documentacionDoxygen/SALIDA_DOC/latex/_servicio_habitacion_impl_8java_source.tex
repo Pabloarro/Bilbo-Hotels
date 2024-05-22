@@ -1,0 +1,105 @@
+\doxysection{Servicio\+Habitacion\+Impl.\+java}
+\hypertarget{_servicio_habitacion_impl_8java_source}{}\label{_servicio_habitacion_impl_8java_source}\index{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/service/impl/ServicioHabitacionImpl.java@{C:/Users/pabloA/Bilbo-\/Hotels/src/main/java/es/deusto/bilboHotels/service/impl/ServicioHabitacionImpl.java}}
+\mbox{\hyperlink{_servicio_habitacion_impl_8java}{Ir a la documentación de este archivo.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00001}00001\ \textcolor{keyword}{package\ }es.deusto.bilboHotels.service.impl;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00003}00003\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.Hotel;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00004}00004\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.Habitacion;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00005}00005\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.model.dto.HabitacionDTO;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00006}00006\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.repository.RepoHabitacion;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00007}00007\ \textcolor{keyword}{import}\ es.deusto.bilboHotels.service.ServicioHabitacion;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00008}00008\ \textcolor{keyword}{import}\ jakarta.persistence.EntityNotFoundException;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00009}00009\ \textcolor{keyword}{import}\ lombok.RequiredArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00010}00010\ \textcolor{keyword}{import}\ lombok.extern.slf4j.Slf4j;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00013}00013\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00014}00014\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00015}00015\ \textcolor{keyword}{import}\ java.util.stream.Collectors;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00017}00017\ @Service}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00018}00018\ @RequiredArgsConstructor}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00019}00019\ @Slf4j}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00020}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl}{00020}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl}{ServicioHabitacionImpl}}\ \textcolor{keyword}{implements}\ ServicioHabitacion\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ RepoHabitacion\ repoHabitacion;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00024}00024\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00025}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_aa1f14c9afb1ec30ae3d3aae8b9167df8}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ Habitacion\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_aa1f14c9afb1ec30ae3d3aae8b9167df8}{guardarHabitacion}}(HabitacionDTO\ habitacionDTO,\ Hotel\ hotel)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Intentando\ guardar\ una\ nueva\ habitación:\ \{\}"{}},\ habitacionDTO);}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ Habitacion\ habitacion\ =\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_ada5611365945fa6c0cdf4098541e2673}{mapHabitacionDtoToHabitacion}}(habitacionDTO,\ hotel);}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ habitacion\ =\ repoHabitacion.save(habitacion);}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Se\ ha\ guardado\ correctamente\ la\ habitación\ con\ ID:\ \{\}"{}},\ habitacion.getId());}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ habitacion;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00033}00033\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00034}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_a1cb7fa645583d1ed645c0ec6d330243e}{00034}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Habitacion>\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_a1cb7fa645583d1ed645c0ec6d330243e}{guardarHabitaciones}}(List<HabitacionDTO>\ habitacionDTOs,\ Hotel\ hotel)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Intentando\ guardar\ habitaciones:\ \{\}"{}},\ habitacionDTOs);}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ List<Habitacion>\ habitaciones\ =\ habitacionDTOs.stream()}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .map(habitacionDTO\ -\/>\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_aa1f14c9afb1ec30ae3d3aae8b9167df8}{guardarHabitacion}}(habitacionDTO,\ hotel))\ \textcolor{comment}{//\ save\ each\ room}}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .collect(Collectors.toList());}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Habitaciones\ guardadas\ correctamente:\ \{\}"{}},\ habitaciones);}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ habitaciones;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00041}00041\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00043}00043\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00044}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_a146fbc332b3b6b249d6e82296c7abb2f}{00044}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Habitacion>\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_a146fbc332b3b6b249d6e82296c7abb2f}{buscarHabitacionbyId}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repoHabitacion.findById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00048}00048\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00049}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_a0c1258f3d8ab58b4731828830cca158b}{00049}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Habitacion>\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_a0c1258f3d8ab58b4731828830cca158b}{buscarHabitacionesByHotelId}}(Long\ hotelId)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00053}00053\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00054}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_a98ee034b60960618f3e173269e1ee217}{00054}}\ \ \ \ \ \textcolor{keyword}{public}\ Habitacion\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_a98ee034b60960618f3e173269e1ee217}{actualizarHabitacion}}(HabitacionDTO\ habitacionDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Intentando\ actualizar\ la\ habitación\ con\ ID:\ \{\}"{}},\ habitacionDTO.getId());}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ Habitacion\ habitacionExistente\ =\ repoHabitacion.findById(habitacionDTO.getId())}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ EntityNotFoundException(\textcolor{stringliteral}{"{}Habitacion\ no\ encontrada"{}}));}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Se\ encontró\ la\ habitación\ con\ ID:\ \{\}"{}},\ habitacionDTO.getId());}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ habitacionExistente.setTipoHabitacion(habitacionDTO.getTipoHabitacion());}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ habitacionExistente.setContadorHabitacion(habitacionDTO.getContadorHabitacion());}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ habitacionExistente.setPrecioPorNoche(habitacionDTO.getPrecioPorNoche());}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ Habitacion\ habitacionActualizada\ =\ repoHabitacion.save(habitacionExistente);}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Se\ ha\ actualizado\ correctamente\ la\ dirección\ con\ ID:\ \{\}"{}},\ habitacionExistente.getId());}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ habitacionActualizada;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00070}00070\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00071}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_aff3e1545d0a971a69e077c327ed42389}{00071}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_aff3e1545d0a971a69e077c327ed42389}{borrarHabitacion}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00075}00075\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00076}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_ada5611365945fa6c0cdf4098541e2673}{00076}}\ \ \ \ \ \textcolor{keyword}{public}\ Habitacion\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_ada5611365945fa6c0cdf4098541e2673}{mapHabitacionDtoToHabitacion}}(HabitacionDTO\ habitacionDTO,\ Hotel\ hotel)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Mapeando\ HabitacionDTO\ a\ habitacion:\ \{\}"{}},\ habitacionDTO);}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ Habitacion\ habitacion\ =\ Habitacion.builder()}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hotel(hotel)}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .tipoHabitacion(habitacionDTO.getTipoHabitacion())}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .contadorHabitacion(habitacionDTO.getContadorHabitacion())}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .precioPorNoche(habitacionDTO.getPrecioPorNoche())}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .build();}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Habitacion\ mapeada:\ \{\}"{}},\ habitacion);}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ habitacion;}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00089}00089\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00090}\mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_a4be6136dab223733a1ccf6bd5c5f6bda}{00090}}\ \ \ \ \ \textcolor{keyword}{public}\ HabitacionDTO\ \mbox{\hyperlink{classes_1_1deusto_1_1bilbo_hotels_1_1service_1_1impl_1_1_servicio_habitacion_impl_a4be6136dab223733a1ccf6bd5c5f6bda}{mapHabitacionToHabitacionDto}}(Habitacion\ habitacion)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ HabitacionDTO.builder()}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .id(habitacion.getId())}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .hotelId(habitacion.getHotel().getId())}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .tipoHabitacion(habitacion.getTipoHabitacion())}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .contadorHabitacion(habitacion.getContadorHabitacion())}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .precioPorNoche(habitacion.getPrecioPorNoche())}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .build();}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00098}00098\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_habitacion_impl_8java_source_l00099}00099\ \}}
+
+\end{DoxyCode}
