@@ -7,3 +7,4 @@ RUN: mvn spring-boot:run
    
 Acceder a la aplicacion en el navegador, entrando en http://localhost:8080/.
 
+start target/site/jacoco/index.html
