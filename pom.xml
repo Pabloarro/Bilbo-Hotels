@@ -8,7 +8,7 @@
         <version>3.1.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>edu.sabanciuniv</groupId>
+    <groupId>es.deusto</groupId>
     <artifactId>BilboHotel</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>BilboHotel</name>
@@ -108,6 +108,14 @@
             <artifactId>jquery-ui</artifactId>
             <version>1.13.2</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -126,5 +134,23 @@
             </plugin>
         </plugins>
     </build>
-
+    <plugin> 
+        <groupId>org.jacoco</groupId> 
+        <artifactId>jacoco-maven-plugin</artifactId> 
+        <version>0.8.2</version> 
+        <executions> 
+            <execution> 
+                <goals> 
+                    <goal>prepare-agent</goal> 
+                </goals> 
+            </execution> 
+            <execution> 
+                <id>report</id> 
+                <phase>test</phase> 
+                <goals> 
+                    <goal>report</goal> 
+                </goals> 
+            </execution> 
+        </executions>
+    </plugin> 
 </project>
