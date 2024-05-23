@@ -1,1 +1,14 @@
-es\deusto\bilboHotel\BilboHotelApplicationTests.class
+es\deusto\bilboHotel\HotelTest.class
+es\deusto\bilboHotel\model\dto\DireccionDTOTest.class
+es\deusto\bilboHotel\DireccionTest.class
+es\deusto\bilboHotel\ClienteTest.class
+es\deusto\bilboHotel\ReservaTest.class
+es\deusto\bilboHotel\HotelManagerTest.class
+es\deusto\bilboHotel\HabitacionReservadaTest.class
+es\deusto\bilboHotel\UsuarioTest.class
+es\deusto\bilboHotel\RolTest.class
+es\deusto\bilboHotel\DisponibilidadTest.class
+es\deusto\bilboHotel\model\dto\HabitacionDTOTest.class
+es\deusto\bilboHotel\PagoTest.class
+es\deusto\bilboHotel\HabitacionTest.class
+es\deusto\bilboHotel\AdminTest.class
