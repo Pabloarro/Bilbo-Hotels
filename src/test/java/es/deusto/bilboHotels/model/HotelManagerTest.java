@@ -1,4 +1,4 @@
-package es.deusto.bilboHotel;
+package es.deusto.bilboHotels.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

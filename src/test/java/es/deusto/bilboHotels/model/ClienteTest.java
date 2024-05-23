@@ -1,4 +1,4 @@
-package es.deusto.bilboHotel;
+package es.deusto.bilboHotels.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,14 +8,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 import es.deusto.bilboHotels.model.Cliente;
 import es.deusto.bilboHotels.model.Reserva;
 import es.deusto.bilboHotels.model.Usuario;
 
-public class DireccionTest {
+public class ClienteTest {
     private Cliente cliente1;
     private Cliente cliente2;
     private Usuario usuario1;
@@ -41,6 +41,9 @@ public class DireccionTest {
 
         List<Reserva> reservaList1 = new ArrayList<>();
         reservaList1.add(reserva1);
+
+        List<Reserva> reservaList2 = new ArrayList<>();
+        reservaList2.add(reserva2);
 
         cliente1 = new Cliente();
         cliente1.setId(1L);

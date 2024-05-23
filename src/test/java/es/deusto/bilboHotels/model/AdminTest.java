@@ -1,4 +1,4 @@
-package es.deusto.bilboHotel;
+package es.deusto.bilboHotels.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -6,9 +6,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import es.deusto.bilboHotels.model.Admin;
-import es.deusto.bilboHotels.model.Usuario;
 
 public class AdminTest {
     private Admin admin1;
