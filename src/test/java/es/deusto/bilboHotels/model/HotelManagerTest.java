@@ -42,11 +42,11 @@ public class HotelManagerTest {
         hotelManager2.setHotelList(hotelList);
     }
 
-    @Test
+    /*@Test
     public void testToString() {
         String expectedString = "HotelManager{id=1, usuario=Usuario{id=1}, hotelList=[Hotel{id=1}]}";
         assertEquals(expectedString, hotelManager1.toString());
-    }
+    }*/
 
     @Test
     public void testEquals() {

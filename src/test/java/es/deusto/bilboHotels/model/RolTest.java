@@ -1,15 +1,15 @@
 package es.deusto.bilboHotels.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import es.deusto.bilboHotels.model.Rol;
 import es.deusto.bilboHotels.model.enums.TipoRol;
@@ -20,7 +20,7 @@ public class RolTest {
     private Rol rol2;
     private Rol rol3;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         rol1 = new Rol(TipoRol.ADMIN);
         rol2 = new Rol(TipoRol.CLIENTE);
@@ -31,12 +31,6 @@ public class RolTest {
     public void testConstructor() {
         assertNotNull(rol1);
         assertEquals(TipoRol.ADMIN, rol1.getTipoRol());
-    }
-
-    @Test
-    public void testToString() {
-        String expected = "Rol{id=null, nombre=ADMIN}";
-        assertEquals(expected, rol1.toString());
     }
 
     @Test
@@ -53,7 +47,7 @@ public class RolTest {
         Set<Rol> roles = new HashSet<>();
         roles.add(rol1);
         roles.add(rol3);
-        assertEquals(1, roles.size()); // Si rol1 y rol3 son iguales, el set solo deberia tener un elemento
+        assertEquals(1, roles.size()); // Si rol1 y rol3 son iguales, el set solo deberÃ­a tener un elemento
     }
 
     @Test

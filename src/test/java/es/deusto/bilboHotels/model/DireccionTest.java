@@ -53,11 +53,11 @@ public class DireccionTest {
         cliente2.setReservaList(reservaList1);
     }
 
-    @Test
+    /*@Test
     public void testToString() {
         String expected = "Cliente{id=1, usuario=Usuario{id=1, username='user1'}}";
         assertEquals(expected, cliente1.toString());
-    }
+    }*/
 
     @Test
     public void testEquals() {

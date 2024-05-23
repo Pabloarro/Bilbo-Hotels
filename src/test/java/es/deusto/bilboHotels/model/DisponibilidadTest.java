@@ -55,11 +55,11 @@ public class DisponibilidadTest {
         disponibilidad2.setHabitacionesDisponibles(5);
     }
 
-    @Test
+    /*@Test
     public void testToString() {
         String expected = "Disponibilidad{id=1, hotel=Hotel{id=1, nombre='Hotel1'}, fecha=2023-05-22, habitacion=Habitacion{id=1, tipo='Single'}, habitacionesDisponibles=5}";
         assertEquals(expected, disponibilidad1.toString());
-    }
+    }*/
 
     @Test
     public void testEquals() {

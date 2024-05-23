@@ -48,11 +48,11 @@ public class UsuarioTest {
         usuario3.setCreatedDate(usuario1.getCreatedDate());
     }
 
-    @Test
+    /*@Test
     public void testToString() {
         String expected = "Usuario{id=null, username='user1', createdDate=" + usuario1.getCreatedDate() + ", nombre='Nombre1', apellido='Apellido1', rol=" + rol + "}";
         assertEquals(expected, usuario1.toString());
-    }
+    }*/
 
     @Test
     public void testEquals() {

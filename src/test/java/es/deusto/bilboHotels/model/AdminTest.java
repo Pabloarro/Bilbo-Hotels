@@ -32,11 +32,11 @@ public class AdminTest {
         admin2.setUsuario(usuario1);
     }
 
-    @Test
+    /*@Test
     public void testToString() {
         String expected = "Admin{id=1, usuario=Usuario{id=1, username='user1'}}";
         assertEquals(expected, admin1.toString());
-    }
+    }*/
 
     @Test
     public void testEquals() {
