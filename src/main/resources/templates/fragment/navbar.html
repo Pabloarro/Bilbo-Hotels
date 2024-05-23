@@ -26,24 +26,24 @@
                     <a class="nav-link" th:href="@{/login}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
                 </li>
                 <!-- Admin -->
-                <li class="nav-item" sec:authorize="hasRole('ROL_ADMIN')">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" th:href="@{/admin/dashboard}">Dashboard</a>
                 </li>
-                <!-- Customer -->
-                <li class="nav-item" sec:authorize="hasRole('ROL_CLIENTE')">
+                <!-- Cliente -->
+                <li class="nav-item" sec:authorize="hasRole('ROLE_CLIENTE')">
                     <a class="nav-link" th:href="@{/search}">Buscar hoteles</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasRole('ROL_CLIENTE')">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_CLIENTE')">
                     <a class="nav-link" th:href="@{/customer/bookings}">Reservas</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasRole('ROL_CLIENTE')">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_CLIENTE')">
                     <a class="nav-link" th:href="@{/customer/account}">Mi cuenta</a>
                 </li>
                 <!-- Hotel Manager -->
-                <li class="nav-item" sec:authorize="hasRole('ROL_HOTEL_MANAGER')">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_HOTEL_MANAGER')">
                     <a class="nav-link" th:href="@{/manager/dashboard}">Dashboard</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasRole('ROL_HOTEL_MANAGER')">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_HOTEL_MANAGER')">
                     <a class="nav-link" th:href="@{/manager/account}">Mi cuenta</a>
                 </li>
                 <!-- Logout -->

@@ -10,11 +10,11 @@ public class RedirectUtil {
     public static String getRedirectUrl(Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ROL_ADMIN")) {
+            if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 return "/admin/dashboard";
-            } else if (grantedAuthority.getAuthority().equals("ROL_CLIENTE")) {
+            } else if (grantedAuthority.getAuthority().equals("ROLE_CLIENTE")) {
                 return "/search";
-            } else if (grantedAuthority.getAuthority().equals("ROL_HOTEL_MANAGER")) {
+            } else if (grantedAuthority.getAuthority().equals("ROLE_HOTEL_MANAGER")) {
                 return "/manager/dashboard";
             }
         }

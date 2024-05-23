@@ -18,11 +18,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final RepoUsuario userRepository;
+    private final RepoUsuario repoUsuario;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = userRepository.findByUsername(username);
+        Usuario usuario = repoUsuario.findByUsername(username);
 
         if (usuario != null) {
             return new org.springframework.security.core.userdetails.User(
@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private Collection<? extends GrantedAuthority> getAuthorities(Usuario usuario){
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROL_" + usuario.getRol().getTipoRol().name()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getTipoRol().name()));
         return authorities;
     }
 
