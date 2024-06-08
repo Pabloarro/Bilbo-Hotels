@@ -1,6 +1,10 @@
-HELP.md
+# Ignore the target directory
 target/
+
+# Ignore the Maven wrapper jar file
 !.mvn/wrapper/maven-wrapper.jar
+
+# Don't ignore target directories inside src/main or src/test directories
 !**/src/main/**/target/
 !**/src/test/**/target/
 
