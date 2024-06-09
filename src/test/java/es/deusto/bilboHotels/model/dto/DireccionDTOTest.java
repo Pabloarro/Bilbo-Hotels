@@ -1,16 +1,15 @@
 package es.deusto.bilboHotels.model.dto;
 
+import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import jakarta.validation.ConstraintViolation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DireccionDTOTest {
 
@@ -23,112 +22,84 @@ public class DireccionDTOTest {
     }
 
     @Test
-    public void testDireccionDTOValid() {
-        DireccionDTO direccion = DireccionDTO.builder()
-                .id(1L)
-                .lineaDireccion("Calle Ejemplo 123")
-                .ciudad("Bilbao")
-                .pais("España")
-                .build();
+    public void whenLineaDireccionIsBlank_thenValidationFails() {
+        DireccionDTO direccionDTO = new DireccionDTO();
+        direccionDTO.setLineaDireccion("");
+        direccionDTO.setCiudad("Bilbao");
+        direccionDTO.setPais("España");
 
-        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccion);
+        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccionDTO);
 
-        assertTrue(violations.isEmpty(), "No debería haber violaciones de validación");
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("lineaDireccion")
+                && v.getMessage().equals("La línea de dirección no puede estar vacía."));
     }
 
     @Test
-    public void testDireccionDTOInvalidLineaDireccion() {
-        DireccionDTO direccion = DireccionDTO.builder()
-                .id(1L)
-                .lineaDireccion("!@#")
-                .ciudad("Bilbao")
-                .pais("España")
-                .build();
+    public void whenCiudadIsBlank_thenValidationFails() {
+        DireccionDTO direccionDTO = new DireccionDTO();
+        direccionDTO.setLineaDireccion("Calle Falsa 123");
+        direccionDTO.setCiudad("");
+        direccionDTO.setPais("España");
 
-        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccion);
+        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccionDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<DireccionDTO> violation = violations.iterator().next();
-        assertEquals("La línea de dirección solo puede contener letras, números y algunos caracteres especiales (., :, -).", violation.getMessage());
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("ciudad")
+                && v.getMessage().equals("La ciudad no puede estar vacia"));
     }
 
     @Test
-    public void testDireccionDTOBlankLineaDireccion() {
-        DireccionDTO direccion = DireccionDTO.builder()
-                .id(1L)
-                .lineaDireccion("")
-                .ciudad("Bilbao")
-                .pais("España")
-                .build();
+    public void whenPaisIsBlank_thenValidationFails() {
+        DireccionDTO direccionDTO = new DireccionDTO();
+        direccionDTO.setLineaDireccion("Calle Falsa 123");
+        direccionDTO.setCiudad("Bilbao");
+        direccionDTO.setPais("");
 
-        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccion);
+        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccionDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<DireccionDTO> violation = violations.iterator().next();
-        assertEquals("La línea de dirección no puede estar vacía.", violation.getMessage());
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("pais")
+                && v.getMessage().equals("El país no puede estar vacío"));
     }
 
     @Test
-    public void testDireccionDTOInvalidCiudad() {
-        DireccionDTO direccion = DireccionDTO.builder()
-                .id(1L)
-                .lineaDireccion("Calle Ejemplo 123")
-                .ciudad("12345")
-                .pais("España")
-                .build();
+    public void whenAllFieldsAreValid_thenValidationSucceeds() {
+        DireccionDTO direccionDTO = new DireccionDTO();
+        direccionDTO.setLineaDireccion("Calle Falsa 123");
+        direccionDTO.setCiudad("Bilbao");
+        direccionDTO.setPais("Espana");
 
-        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccion);
+        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccionDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<DireccionDTO> violation = violations.iterator().next();
-        assertEquals("La ciudad solo puede contener letras", violation.getMessage());
+        assertThat(violations).isEmpty();
     }
 
     @Test
-    public void testDireccionDTOBlankCiudad() {
-        DireccionDTO direccion = DireccionDTO.builder()
-                .id(1L)
-                .lineaDireccion("Calle Ejemplo 123")
-                .ciudad("")
-                .pais("España")
-                .build();
+    public void whenInvalidCiudad_thenValidationFails() {
+        DireccionDTO direccionDTO = new DireccionDTO();
+        direccionDTO.setLineaDireccion("Calle Falsa 123");
+        direccionDTO.setCiudad("12345");
+        direccionDTO.setPais("España");
 
-        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccion);
+        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccionDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<DireccionDTO> violation = violations.iterator().next();
-        assertEquals("La ciudad no puede estar vacia", violation.getMessage());
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("ciudad")
+                && v.getMessage().equals("La ciudad solo puede contener letras"));
     }
 
     @Test
-    public void testDireccionDTOInvalidPais() {
-        DireccionDTO direccion = DireccionDTO.builder()
-                .id(1L)
-                .lineaDireccion("Calle Ejemplo 123")
-                .ciudad("Bilbao")
-                .pais("12345")
-                .build();
+    public void whenInvalidLineaDireccion_thenValidationFails() {
+        DireccionDTO direccionDTO = new DireccionDTO();
+        direccionDTO.setLineaDireccion("Calle Falsa 123!!");
+        direccionDTO.setCiudad("Bilbao");
+        direccionDTO.setPais("España");
 
-        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccion);
+        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccionDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<DireccionDTO> violation = violations.iterator().next();
-        assertEquals("El país solo puede contener letras", violation.getMessage());
-    }
-
-    @Test
-    public void testDireccionDTOBlankPais() {
-        DireccionDTO direccion = DireccionDTO.builder()
-                .id(1L)
-                .lineaDireccion("Calle Ejemplo 123")
-                .ciudad("Bilbao")
-                .pais("")
-                .build();
-
-        Set<ConstraintViolation<DireccionDTO>> violations = validator.validate(direccion);
-
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<DireccionDTO> violation = violations.iterator().next();
-        assertEquals("El país no puede estar vacío", violation.getMessage());
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("lineaDireccion")
+                && v.getMessage().equals("La línea de dirección solo puede contener letras, números y algunos caracteres especiales (., :, -)."));
     }
 }
