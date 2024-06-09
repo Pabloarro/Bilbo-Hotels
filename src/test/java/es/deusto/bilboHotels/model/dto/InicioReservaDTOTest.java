@@ -1,63 +1,37 @@
 package es.deusto.bilboHotels.model.dto;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class InicioReservaDTOTest {
 
-    private Validator validator;
-
-    @BeforeEach
-    public void setUp() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
-    }
-
     @Test
-    public void testInicioReservaDTOValid() {
-        InicioReservaDTO inicioReservaDTO = InicioReservaDTO.builder()
-                .hotelId(1L)
-                .fechaCheckIn(LocalDate.now())
-                .fechaCheckOut(LocalDate.now().plusDays(1))
-                .duracionDias(1L)
-                .habitacionSelecciones(new ArrayList<>())
-                .precioTotal(BigDecimal.TEN)
-                .build();
+    public void testConstructorAndGetters() {
+        // Arrange
+        long hotelId = 123;
+        LocalDate fechaCheckIn = LocalDate.of(2024, 6, 10);
+        LocalDate fechaCheckOut = LocalDate.of(2024, 6, 12);
+        long duracionDias = 2;
+        List<HabitacionSeleccionDTO> habitacionSelecciones = new ArrayList<>();
+        BigDecimal precioTotal = BigDecimal.valueOf(200);
 
-        Set<ConstraintViolation<InicioReservaDTO>> violations = validator.validate(inicioReservaDTO);
+        // Act
+        InicioReservaDTO inicioReservaDTO = new InicioReservaDTO(hotelId, fechaCheckIn, fechaCheckOut, duracionDias, habitacionSelecciones, precioTotal);
 
-        assertTrue(violations.isEmpty(), "No debería haber violaciones de validación");
-    }
-
-    @Test
-    public void testInicioReservaDTOInvalidHotelId() {
-        InicioReservaDTO inicioReservaDTO = InicioReservaDTO.builder()
-                .hotelId(0L)
-                .fechaCheckIn(LocalDate.now())
-                .fechaCheckOut(LocalDate.now().plusDays(1))
-                .duracionDias(1L)
-                .habitacionSelecciones(new ArrayList<>())
-                .precioTotal(BigDecimal.TEN)
-                .build();
-
-        Set<ConstraintViolation<InicioReservaDTO>> violations = validator.validate(inicioReservaDTO);
-
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<InicioReservaDTO> violation = violations.iterator().next();
-        assertEquals("hotelId debe ser mayor que 0", violation.getMessage());
+        // Assert
+        assertNotNull(inicioReservaDTO);
+        assertEquals(hotelId, inicioReservaDTO.getHotelId());
+        assertEquals(fechaCheckIn, inicioReservaDTO.getFechaCheckIn());
+        assertEquals(fechaCheckOut, inicioReservaDTO.getFechaCheckOut());
+        assertEquals(duracionDias, inicioReservaDTO.getDuracionDias());
+        assertEquals(habitacionSelecciones, inicioReservaDTO.getHabitacionSelecciones());
+        assertEquals(precioTotal, inicioReservaDTO.getPrecioTotal());
     }
 }

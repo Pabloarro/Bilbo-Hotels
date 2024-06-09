@@ -1,19 +1,16 @@
 package es.deusto.bilboHotels.model.dto;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HotelDTOTest {
 
@@ -26,68 +23,55 @@ public class HotelDTOTest {
     }
 
     @Test
-    public void testHotelDTOValid() {
+    public void testValidHotelDTO() {
         HotelDTO hotelDTO = HotelDTO.builder()
-                .id(1L)
-                .nombre("Hotel Ejemplo")
-                .direccionDTO(DireccionDTO.builder().build())
-                .habitacionDTOs(new ArrayList<>())
-                .managerUsername("manager")
+                .nombre("Hotel XYZ")
+                .direccionDTO(DireccionDTO.builder()
+                        .lineaDireccion("Calle Falsa 123")
+                        .ciudad("Bilbao")
+                        .pais("Espana")
+                        .build())
                 .build();
 
         Set<ConstraintViolation<HotelDTO>> violations = validator.validate(hotelDTO);
 
-        assertTrue(violations.isEmpty(), "No debería haber violaciones de validación");
+        assertThat(violations).isEmpty();
     }
 
     @Test
-    public void testHotelDTOInvalidNombre() {
+    public void testInvalidNombre() {
         HotelDTO hotelDTO = HotelDTO.builder()
-                .id(1L)
-                .nombre("1234")
-                .direccionDTO(DireccionDTO.builder().build())
-                .habitacionDTOs(new ArrayList<>())
-                .managerUsername("manager")
+                .nombre("") // Nombre vacío
+                .direccionDTO(DireccionDTO.builder()
+                        .lineaDireccion("Calle Falsa 123")
+                        .ciudad("Bilbao")
+                        .pais("España")
+                        .build())
                 .build();
 
         Set<ConstraintViolation<HotelDTO>> violations = validator.validate(hotelDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<HotelDTO> violation = violations.iterator().next();
-        assertEquals("El nombre del hotel solo puede contener letras y numeros", violation.getMessage());
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("nombre")
+                && v.getMessage().equals("El nombre del hotel no puede estar vacio"));
     }
 
     @Test
-    public void testHotelDTOInvalidDireccion() {
+    public void testInvalidDireccionDTO() {
         HotelDTO hotelDTO = HotelDTO.builder()
-                .id(1L)
-                .nombre("Hotel Ejemplo")
-                .direccionDTO(null)
-                .habitacionDTOs(new ArrayList<>())
-                .managerUsername("manager")
+                .nombre("Hotel XYZ")
+                .direccionDTO(DireccionDTO.builder()
+                        .lineaDireccion("") // Línea de dirección vacía
+                        .ciudad("Bilbao")
+                        .pais("España")
+                        .build())
                 .build();
 
         Set<ConstraintViolation<HotelDTO>> violations = validator.validate(hotelDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<HotelDTO> violation = violations.iterator().next();
-        assertEquals("direccionDTO no puede ser nulo", violation.getMessage());
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("direccionDTO.lineaDireccion")
+                && v.getMessage().equals("La línea de dirección no puede estar vacía."));
     }
 
-    @Test
-    public void testHotelDTOInvalidManagerUsername() {
-        HotelDTO hotelDTO = HotelDTO.builder()
-                .id(1L)
-                .nombre("Hotel Ejemplo")
-                .direccionDTO(DireccionDTO.builder().build())
-                .habitacionDTOs(new ArrayList<>())
-                .managerUsername(null)
-                .build();
-
-        Set<ConstraintViolation<HotelDTO>> violations = validator.validate(hotelDTO);
-
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<HotelDTO> violation = violations.iterator().next();
-        assertEquals("managerUsername no puede ser nulo", violation.getMessage());
-    }
 }

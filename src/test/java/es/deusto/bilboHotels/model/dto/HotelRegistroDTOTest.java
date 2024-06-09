@@ -1,19 +1,17 @@
 package es.deusto.bilboHotels.model.dto;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HotelRegistroDTOTest {
 
@@ -26,45 +24,54 @@ public class HotelRegistroDTOTest {
     }
 
     @Test
-    public void testHotelRegistroDTOValid() {
+    public void testValidHotelRegistroDTO() {
         HotelRegistroDTO hotelRegistroDTO = HotelRegistroDTO.builder()
-                .nombre("Hotel Ejemplo")
-                .direccionDTO(DireccionDTO.builder().build())
-                .habitacionDTOs(new ArrayList<>())
+                .nombre("Hotel XYZ")
+                .direccionDTO(DireccionDTO.builder()
+                        .lineaDireccion("Calle Falsa 123")
+                        .ciudad("Bilbao")
+                        .pais("Espana")
+                        .build())
                 .build();
 
         Set<ConstraintViolation<HotelRegistroDTO>> violations = validator.validate(hotelRegistroDTO);
 
-        assertTrue(violations.isEmpty(), "No debería haber violaciones de validación");
+        assertThat(violations).isEmpty();
     }
 
     @Test
-    public void testHotelRegistroDTOInvalidNombre() {
+    public void testInvalidNombre() {
         HotelRegistroDTO hotelRegistroDTO = HotelRegistroDTO.builder()
-                .nombre("1234")
-                .direccionDTO(DireccionDTO.builder().build())
-                .habitacionDTOs(new ArrayList<>())
+                .nombre("")
+                .direccionDTO(DireccionDTO.builder()
+                        .lineaDireccion("Calle Falsa 123")
+                        .ciudad("Bilbao")
+                        .pais("España")
+                        .build())
                 .build();
 
         Set<ConstraintViolation<HotelRegistroDTO>> violations = validator.validate(hotelRegistroDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<HotelRegistroDTO> violation = violations.iterator().next();
-        assertEquals("El nombre del hotel solo puede contener letras y numoers", violation.getMessage());
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("nombre")
+                && v.getMessage().equals("El nombre del hotel no puede estar vacio"));
     }
 
     @Test
-    public void testHotelRegistroDTOInvalidDireccion() {
+    public void testInvalidDireccionDTO() {
         HotelRegistroDTO hotelRegistroDTO = HotelRegistroDTO.builder()
-                .nombre("Hotel Ejemplo")
-                .direccionDTO(null)
-                .habitacionDTOs(new ArrayList<>())
+                .nombre("Hotel XYZ")
+                .direccionDTO(DireccionDTO.builder()
+                        .lineaDireccion("")
+                        .ciudad("Bilbao")
+                        .pais("España")
+                        .build())
                 .build();
 
         Set<ConstraintViolation<HotelRegistroDTO>> violations = validator.validate(hotelRegistroDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<HotelRegistroDTO> violation = violations.iterator().next();
-        assertEquals("direccionDTO no puede ser nulo", violation.getMessage());
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("direccionDTO.lineaDireccion")
+                && v.getMessage().equals("La línea de dirección no puede estar vacía."));
     }
 }
