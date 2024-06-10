@@ -31,5 +31,6 @@ Para acceder a la pagina entramos en:
 
     Acceder a la aplicacion en el navegador, entrando en http://localhost:8080/
 
-
+Para generar la documentacion usamos:
+mvn doxygen:report
 
