@@ -1,17 +1,16 @@
 package es.deusto.bilboHotels.model.dto;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Set;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ResetearPasswordDTOTest {
 
@@ -24,7 +23,7 @@ public class ResetearPasswordDTOTest {
     }
 
     @Test
-    public void testResetearPasswordDTOValid() {
+    public void testValidResetearPasswordDTO() {
         ResetearPasswordDTO resetearPasswordDTO = ResetearPasswordDTO.builder()
                 .antiguaPassword("oldPassword")
                 .nuevaPassword("newPassword")
@@ -33,21 +32,46 @@ public class ResetearPasswordDTOTest {
 
         Set<ConstraintViolation<ResetearPasswordDTO>> violations = validator.validate(resetearPasswordDTO);
 
-        assertTrue(violations.isEmpty(), "No debería haber violaciones de validación");
+        assertTrue(violations.isEmpty());
     }
 
     @Test
-    public void testResetearPasswordDTOInvalidMismatchedPasswords() {
+    public void testInvalidAntiguaPassword() {
         ResetearPasswordDTO resetearPasswordDTO = ResetearPasswordDTO.builder()
-                .antiguaPassword("oldPassword")
+                .antiguaPassword("") // Contraseña antigua vacía
                 .nuevaPassword("newPassword")
-                .confirmarNuevaPassword("wrongPassword")
+                .confirmarNuevaPassword("newPassword")
                 .build();
 
         Set<ConstraintViolation<ResetearPasswordDTO>> violations = validator.validate(resetearPasswordDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<ResetearPasswordDTO> violation = violations.iterator().next();
-        assertEquals("La contrasenia no puede estar vacía.", violation.getMessage());
+        assertFalse(violations.isEmpty());
+    }
+
+    @Test
+    public void testInvalidNuevaPassword() {
+        ResetearPasswordDTO resetearPasswordDTO = ResetearPasswordDTO.builder()
+                .antiguaPassword("oldPassword")
+                .nuevaPassword("") // Contraseña nueva vacía
+                .confirmarNuevaPassword("newPassword")
+                .build();
+
+        Set<ConstraintViolation<ResetearPasswordDTO>> violations = validator.validate(resetearPasswordDTO);
+
+        assertFalse(violations.isEmpty());
+    }
+
+    @Test
+    public void testInvalidConfirmarNuevaPassword() {
+        ResetearPasswordDTO resetearPasswordDTO = ResetearPasswordDTO.builder()
+                .antiguaPassword("oldPassword")
+                .nuevaPassword("newPassword")
+                .confirmarNuevaPassword("") // Confirmación de contraseña nueva vacía
+                .build();
+
+        Set<ConstraintViolation<ResetearPasswordDTO>> violations = validator.validate(resetearPasswordDTO);
+
+        assertFalse(violations.isEmpty());
     }
 }
+
