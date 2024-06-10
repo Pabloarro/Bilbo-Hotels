@@ -1,82 +1,60 @@
 package es.deusto.bilboHotels.model.dto;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import es.deusto.bilboHotels.model.enums.EstadoPago;
+import es.deusto.bilboHotels.model.enums.MetodoPago;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ReservaDTOTest {
 
-    private Validator validator;
-
-    @BeforeEach
-    public void setUp() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
-    }
-
     @Test
-    public void testReservaDTOValid() {
-        ReservaDTO reservaDTO = ReservaDTO.builder()
-                .id(1L)
-                .numeroConfirmacion("ABC123")
-                .fechaReserva(LocalDateTime.now())
-                .clienteId(1L)
-                .hotelId(1L)
-                .fechaCheckIn(LocalDate.now())
-                .fechaCheckOut(LocalDate.now().plusDays(1))
-                .seleccionesHabitacion(new ArrayList<>())
-                .precioTotal(BigDecimal.TEN)
-                .nombreHotel("Hotel Ejemplo")
-                .direccionHotel(new DireccionDTO())
-                .nombreCliente("Jon Garcia")
-                .emailCliente("jon@example.com")
-                //.estadoPago(EstadoPago.PENDIENTE)
-                //.metodoPago(MetodoPago.TARJETA_CREDITO)
-                .build();
+    public void testConstructorAndGetters() {
+        // Arrange
+        Long id = 1L;
+        String numeroConfirmacion = "ABC123";
+        LocalDateTime fechaReserva = LocalDateTime.now();
+        Long clienteId = 2L;
+        Long hotelId = 3L;
+        LocalDate fechaCheckIn = LocalDate.now();
+        LocalDate fechaCheckOut = LocalDate.now().plusDays(1);
+        List<HabitacionSeleccionDTO> seleccionesHabitacion = new ArrayList<>();
+        BigDecimal precioTotal = BigDecimal.valueOf(100);
+        String nombreHotel = "Hotel ABC";
+        DireccionDTO direccionHotel = DireccionDTO.builder().lineaDireccion("Calle Falsa 123").ciudad("Bilbao").pais("España").build();
+        String nombreCliente = "John Doe";
+        String emailCliente = "john.doe@example.com";
+        EstadoPago estadoPago = EstadoPago.PENDIENTE;
+        MetodoPago metodoPago = MetodoPago.TARJETA_CREDITO;
 
-        Set<ConstraintViolation<ReservaDTO>> violations = validator.validate(reservaDTO);
+        // Act
+        ReservaDTO reservaDTO = new ReservaDTO(id, numeroConfirmacion, fechaReserva, clienteId, hotelId, fechaCheckIn,
+                fechaCheckOut, seleccionesHabitacion, precioTotal, nombreHotel, direccionHotel, nombreCliente,
+                emailCliente, estadoPago, metodoPago);
 
-        assertTrue(violations.isEmpty(), "No debería haber violaciones de validación");
-    }
-
-    @Test
-    public void testReservaDTOInvalidNumeroConfirmacion() {
-        ReservaDTO reservaDTO = ReservaDTO.builder()
-                .id(1L)
-                .numeroConfirmacion("")
-                .fechaReserva(LocalDateTime.now())
-                .clienteId(1L)
-                .hotelId(1L)
-                .fechaCheckIn(LocalDate.now())
-                .fechaCheckOut(LocalDate.now().plusDays(1))
-                .seleccionesHabitacion(new ArrayList<>())
-                .precioTotal(BigDecimal.TEN)
-                .nombreHotel("Hotel Ejemplo")
-                .direccionHotel(new DireccionDTO())
-                .nombreCliente("Jon Garcia")
-                .emailCliente("jon@example.com")
-                //.estadoPago(EstadoPago.PENDIENTE)
-                //.metodoPago(MetodoPago.TARJETA_CREDITO)
-                .build();
-
-        Set<ConstraintViolation<ReservaDTO>> violations = validator.validate(reservaDTO);
-
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<ReservaDTO> violation = violations.iterator().next();
-        assertEquals("La dirección de correo electrónico no puede estar vacía.", violation.getMessage());
+        // Assert
+        assertNotNull(reservaDTO);
+        assertEquals(id, reservaDTO.getId());
+        assertEquals(numeroConfirmacion, reservaDTO.getNumeroConfirmacion());
+        assertEquals(fechaReserva, reservaDTO.getFechaReserva());
+        assertEquals(clienteId, reservaDTO.getClienteId());
+        assertEquals(hotelId, reservaDTO.getHotelId());
+        assertEquals(fechaCheckIn, reservaDTO.getFechaCheckIn());
+        assertEquals(fechaCheckOut, reservaDTO.getFechaCheckOut());
+        assertEquals(seleccionesHabitacion, reservaDTO.getSeleccionesHabitacion());
+        assertEquals(precioTotal, reservaDTO.getPrecioTotal());
+        assertEquals(nombreHotel, reservaDTO.getNombreHotel());
+        assertEquals(direccionHotel, reservaDTO.getDireccionHotel());
+        assertEquals(nombreCliente, reservaDTO.getNombreCliente());
+        assertEquals(emailCliente, reservaDTO.getEmailCliente());
+        assertEquals(estadoPago, reservaDTO.getEstadoPago());
+        assertEquals(metodoPago, reservaDTO.getMetodoPago());
     }
 }

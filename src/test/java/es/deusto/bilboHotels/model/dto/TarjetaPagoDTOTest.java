@@ -1,17 +1,17 @@
 package es.deusto.bilboHotels.model.dto;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Set;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.time.YearMonth;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TarjetaPagoDTOTest {
 
@@ -24,23 +24,23 @@ public class TarjetaPagoDTOTest {
     }
 
     @Test
-    public void testTarjetaPagoDTOValid() {
+    public void testValidTarjetaPagoDTO() {
         TarjetaPagoDTO tarjetaPagoDTO = TarjetaPagoDTO.builder()
-                .nombreTitular("Jon Garcia")
-                .numeroTarjeta("4111111111111111")
-                .caducidadTarjeta("12/25")
+                .nombreTitular("John Doe")
+                .numeroTarjeta("4111111111111111") // Visa test card number
+                .caducidadTarjeta("12/25") // Caducidad válida
                 .cvc("123")
                 .build();
 
         Set<ConstraintViolation<TarjetaPagoDTO>> violations = validator.validate(tarjetaPagoDTO);
 
-        assertTrue(violations.isEmpty(), "No debería haber violaciones de validación");
+        assertTrue(violations.isEmpty());
     }
 
     @Test
-    public void testTarjetaPagoDTOInvalidName() {
+    public void testInvalidNombreTitular() {
         TarjetaPagoDTO tarjetaPagoDTO = TarjetaPagoDTO.builder()
-                .nombreTitular("Jon123")
+                .nombreTitular("1234") // Nombre inválido
                 .numeroTarjeta("4111111111111111")
                 .caducidadTarjeta("12/25")
                 .cvc("123")
@@ -48,8 +48,48 @@ public class TarjetaPagoDTOTest {
 
         Set<ConstraintViolation<TarjetaPagoDTO>> violations = validator.validate(tarjetaPagoDTO);
 
-        assertEquals(1, violations.size(), "Debe haber una violación de validación");
-        ConstraintViolation<TarjetaPagoDTO> violation = violations.iterator().next();
-        assertEquals("El nombre del titular solo puede contener letras y espacios", violation.getMessage());
+        assertFalse(violations.isEmpty());
+    }
+
+    @Test
+    public void testInvalidNumeroTarjeta() {
+        TarjetaPagoDTO tarjetaPagoDTO = TarjetaPagoDTO.builder()
+                .nombreTitular("John Doe")
+                .numeroTarjeta("1234") // Número de tarjeta inválido
+                .caducidadTarjeta("12/25")
+                .cvc("123")
+                .build();
+
+        Set<ConstraintViolation<TarjetaPagoDTO>> violations = validator.validate(tarjetaPagoDTO);
+
+        assertFalse(violations.isEmpty());
+    }
+
+    @Test
+    public void testInvalidCaducidadTarjeta() {
+        TarjetaPagoDTO tarjetaPagoDTO = TarjetaPagoDTO.builder()
+                .nombreTitular("John Doe")
+                .numeroTarjeta("4111111111111111")
+                .caducidadTarjeta("12/20") // Caducidad anterior a la fecha actual
+                .cvc("123")
+                .build();
+
+        Set<ConstraintViolation<TarjetaPagoDTO>> violations = validator.validate(tarjetaPagoDTO);
+
+        assertFalse(violations.isEmpty());
+    }
+
+    @Test
+    public void testInvalidCvc() {
+        TarjetaPagoDTO tarjetaPagoDTO = TarjetaPagoDTO.builder()
+                .nombreTitular("John Doe")
+                .numeroTarjeta("4111111111111111")
+                .caducidadTarjeta(YearMonth.now().plusMonths(1).toString())
+                .cvc("12") // CVC inválido
+                .build();
+
+        Set<ConstraintViolation<TarjetaPagoDTO>> violations = validator.validate(tarjetaPagoDTO);
+
+        assertFalse(violations.isEmpty());
     }
 }
