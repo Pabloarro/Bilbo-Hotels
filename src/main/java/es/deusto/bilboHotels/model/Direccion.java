@@ -26,6 +26,13 @@ public class Direccion {
     @Column(nullable = false)
     private String pais;
 
+    // Constructor que acepta los mismos parámetros que DireccionBuilder
+    public Direccion(String lineaDireccion, String ciudad, String pais) {
+        this.lineaDireccion = lineaDireccion;
+        this.ciudad = ciudad;
+        this.pais = pais;
+    }
+
     @Override
     public String toString() {
         return "Address{" +
