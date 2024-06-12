@@ -1,0 +1,60 @@
+package es.deusto.bilboHotels.model;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.time.LocalDate;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+public class DisponibilidadIntegrationTest {
+
+    private static EntityManagerFactory emf;
+    private static EntityManager em;
+
+    @BeforeAll
+    public static void setUpBeforeClass() {
+        emf = Persistence.createEntityManagerFactory("test");
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+    }
+
+    @AfterAll
+    public static void tearDownAfterClass() {
+        em.getTransaction().rollback();
+        em.close();
+        emf.close();
+    }
+
+    @Test
+    public void testSaveAndRetrieveDisponibilidad() {
+        // Crear una nueva instancia de Disponibilidad
+        Disponibilidad disponibilidad = Disponibilidad.builder()
+            .hotel(new Hotel("Hotel Test"))
+            .fecha(LocalDate.now())
+            .habitacion(new Habitacion())
+            .habitacionesDisponibles(5)
+            .build();
+
+        // Guardar la instancia en la base de datos
+        em.persist(disponibilidad);
+        em.getTransaction().commit();
+        em.clear();
+
+        // Recuperar la instancia de la base de datos
+        Disponibilidad retrievedDisponibilidad = em.find(Disponibilidad.class, disponibilidad.getId());
+
+        // Verificar que la instancia recuperada no sea nula y tenga los mismos atributos que la instancia original
+        assertNotNull(retrievedDisponibilidad);
+        assertEquals(disponibilidad.getHotel().getNombre(), retrievedDisponibilidad.getHotel().getNombre());
+        assertEquals(disponibilidad.getFecha(), retrievedDisponibilidad.getFecha());
+        assertEquals(disponibilidad.getHabitacion().getId(), retrievedDisponibilidad.getHabitacion().getId());
+        assertEquals(disponibilidad.getHabitacionesDisponibles(), retrievedDisponibilidad.getHabitacionesDisponibles());
+    }
+}
