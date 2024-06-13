@@ -9,19 +9,25 @@ import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import es.deusto.bilboHotels.model.Rol;
 import es.deusto.bilboHotels.model.Usuario;
 import es.deusto.bilboHotels.model.enums.TipoRol;
 
 public class UsuarioTest {
+    @InjectMocks
     private Usuario usuario1;
     private Usuario usuario2;
     private Usuario usuario3;
+    @Mock
     private Rol rol;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
         rol = new Rol(TipoRol.ADMIN); // Asegúrate de que el constructor de Rol y TipoRol estén definidos
         usuario1 = new Usuario();
         usuario1.setUsername("user1");

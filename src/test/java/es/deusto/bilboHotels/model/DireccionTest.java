@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.junit.Before;
 
 import es.deusto.bilboHotels.model.Cliente;
@@ -16,6 +18,7 @@ import es.deusto.bilboHotels.model.Reserva;
 import es.deusto.bilboHotels.model.Usuario;
 
 public class DireccionTest {
+    @Mock
     private Cliente cliente1;
     private Cliente cliente2;
     private Usuario usuario1;
@@ -25,6 +28,7 @@ public class DireccionTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
         usuario1 = new Usuario();
         usuario1.setId(1L);
         usuario1.setUsername("user1");

@@ -14,6 +14,9 @@ import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import es.deusto.bilboHotels.model.Cliente;
 import es.deusto.bilboHotels.model.HabitacionReservada;
@@ -22,13 +25,16 @@ import es.deusto.bilboHotels.model.Pago;
 import es.deusto.bilboHotels.model.Reserva;
 
 public class ReservaTest {
+    @InjectMocks
     private Reserva reserva;
+    @Mock
     private Cliente cliente;
     private Hotel hotel;
     private List<HabitacionReservada> habitacionReservadas;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
         cliente = new Cliente();
         hotel = new Hotel();
         habitacionReservadas = new ArrayList<>();

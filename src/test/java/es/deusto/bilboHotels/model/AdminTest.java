@@ -6,15 +6,21 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class AdminTest {
+    @InjectMocks
     private Admin admin1;
     private Admin admin2;
+    @Mock
     private Usuario usuario1;
     private Usuario usuario2;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
         usuario1 = new Usuario();
         usuario1.setId(1L);
         usuario1.setUsername("user1");

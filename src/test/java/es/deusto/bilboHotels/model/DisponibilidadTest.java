@@ -9,14 +9,19 @@ import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import es.deusto.bilboHotels.model.Disponibilidad;
 import es.deusto.bilboHotels.model.Habitacion;
 import es.deusto.bilboHotels.model.Hotel;
 
 public class DisponibilidadTest {
-     private Disponibilidad disponibilidad1;
+    @InjectMocks
+    private Disponibilidad disponibilidad1;
     private Disponibilidad disponibilidad2;
+    @Mock
     private Hotel hotel1;
     private Hotel hotel2;
     private Habitacion habitacion1;
@@ -24,6 +29,7 @@ public class DisponibilidadTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
         hotel1 = new Hotel();
         hotel1.setId(1L);
         hotel1.setNombre("Hotel1");

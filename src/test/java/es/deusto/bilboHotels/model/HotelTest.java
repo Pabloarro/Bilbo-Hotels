@@ -10,6 +10,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import es.deusto.bilboHotels.model.Direccion;
 import es.deusto.bilboHotels.model.Habitacion;
@@ -18,8 +21,10 @@ import es.deusto.bilboHotels.model.HotelManager;
 import es.deusto.bilboHotels.model.Reserva;
 
 public class HotelTest {
+    @InjectMocks
     private Hotel hotel1;
     private Hotel hotel2;
+    @Mock
     private Direccion direccion;
     private HotelManager hotelManager;
     private List<Habitacion> habitaciones;
@@ -27,6 +32,7 @@ public class HotelTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
         direccion = new Direccion(); // Suponiendo que tienes una clase Direccion
         direccion.setId(1L); // Set an ID for the direccion
         

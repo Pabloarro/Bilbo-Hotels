@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import es.deusto.bilboHotels.model.Pago;
 import es.deusto.bilboHotels.model.Reserva;
@@ -18,12 +21,15 @@ import es.deusto.bilboHotels.model.enums.EstadoPago;
 import es.deusto.bilboHotels.model.enums.MetodoPago;
 
 public class PagoTest {
+    @InjectMocks
     private Pago pago1;
     private Pago pago2;
+    @Mock
     private Reserva reserva;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
         reserva = new Reserva();
         pago1 = new Pago();
         pago1.setId(1L);

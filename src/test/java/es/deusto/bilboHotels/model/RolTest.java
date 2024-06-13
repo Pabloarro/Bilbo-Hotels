@@ -10,18 +10,21 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 
 import es.deusto.bilboHotels.model.Rol;
 import es.deusto.bilboHotels.model.enums.TipoRol;
 
 public class RolTest {
-    
+    @InjectMocks
     private Rol rol1;
     private Rol rol2;
     private Rol rol3;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
         rol1 = new Rol(TipoRol.ADMIN);
         rol2 = new Rol(TipoRol.CLIENTE);
         rol3 = new Rol(TipoRol.ADMIN);
