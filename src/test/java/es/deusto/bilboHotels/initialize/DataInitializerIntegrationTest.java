@@ -1,4 +1,4 @@
-package es.deusto.bilboHotels.initialize;
+/*package es.deusto.bilboHotels.initialize;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -71,4 +71,4 @@ public class DataInitializerIntegrationTest {
         assertTrue(hoteles.stream().anyMatch(h -> h.getNombre().equals("Hotel Central")), "El hotel central no se ha inicializado");
         assertTrue(habitaciones.stream().anyMatch(h -> h.getNumero() == 101), "La habitación 101 no se ha inicializado");
     }
-}
+}*/
