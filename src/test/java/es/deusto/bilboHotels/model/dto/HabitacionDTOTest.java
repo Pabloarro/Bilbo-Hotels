@@ -117,6 +117,62 @@ public class HabitacionDTOTest {
         assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("precioPorNoche")
                 && v.getMessage().equals("El preciop no puede estar vacio"));
     }
+
+    @Test
+    public void testSettersAndGetters() {
+        HabitacionDTO habitacionDTO = new HabitacionDTO();
+        habitacionDTO.setId(1L);
+        habitacionDTO.setHotelId(1L);
+        habitacionDTO.setTipoHabitacion(TipoHabitacion.DOBLE);
+
+        assertThat(habitacionDTO.getId()).isEqualTo(1L);
+        assertThat(habitacionDTO.getHotelId()).isEqualTo(1L);
+        assertThat(habitacionDTO.getTipoHabitacion()).isEqualTo(TipoHabitacion.DOBLE);
+    }
+
+    @Test
+    public void testEqualsAndHashCode() {
+        HabitacionDTO habitacionDTO1 = HabitacionDTO.builder()
+                .id(1L)
+                .hotelId(1L)
+                .tipoHabitacion(TipoHabitacion.DOBLE)
+                .contadorHabitacion(2)
+                .precioPorNoche(100.0)
+                .build();
+
+        HabitacionDTO habitacionDTO2 = HabitacionDTO.builder()
+                .id(1L)
+                .hotelId(1L)
+                .tipoHabitacion(TipoHabitacion.DOBLE)
+                .contadorHabitacion(2)
+                .precioPorNoche(100.0)
+                .build();
+
+        assertThat(habitacionDTO1).isEqualTo(habitacionDTO2);
+        assertThat(habitacionDTO1.hashCode()).isEqualTo(habitacionDTO2.hashCode());
+    }
+
+    @Test
+    public void testNotEqualsAndHashCode() {
+        HabitacionDTO habitacionDTO1 = HabitacionDTO.builder()
+                .id(1L)
+                .hotelId(1L)
+                .tipoHabitacion(TipoHabitacion.DOBLE)
+                .contadorHabitacion(2)
+                .precioPorNoche(100.0)
+                .build();
+
+        HabitacionDTO habitacionDTO2 = HabitacionDTO.builder()
+                .id(2L)
+                .hotelId(2L)
+                .tipoHabitacion(TipoHabitacion.INDIVIDUAL)
+                .contadorHabitacion(3)
+                .precioPorNoche(150.0)
+                .build();
+
+        assertThat(habitacionDTO1).isNotEqualTo(habitacionDTO2);
+        assertThat(habitacionDTO1.hashCode()).isNotEqualTo(habitacionDTO2.hashCode());
+    }
 }
 
 
