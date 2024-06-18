@@ -36,7 +36,7 @@ public class HabitacionDTOTest {
         assertThat(violations).isEmpty();
     }
 
-  /*  @Test
+   /*  @Test
     public void testInvalidContadorHabitacion() {
         HabitacionDTO habitacionDTO = HabitacionDTO.builder()
                 .hotelId(1L)
@@ -67,4 +67,56 @@ public class HabitacionDTOTest {
         assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("precioPorNoche")
                 && v.getMessage().equals("El precio por noche debe ser 0 o más."));
     }
+
+    @Test
+    public void testNullContadorHabitacion() {
+        HabitacionDTO habitacionDTO = HabitacionDTO.builder()
+                .hotelId(1L)
+                .tipoHabitacion(TipoHabitacion.DOBLE)
+                .contadorHabitacion(null) // Contador de habitaciones nulo
+                .precioPorNoche(100.0)
+                .build();
+
+        Set<ConstraintViolation<HabitacionDTO>> violations = validator.validate(habitacionDTO);
+
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("contadorHabitacion")
+                && v.getMessage().equals("El contador de habitacion no puede estar vacio"));
+    }
+
+    @Test
+    public void testNullPrecioPorNoche() {
+        HabitacionDTO habitacionDTO = HabitacionDTO.builder()
+                .hotelId(1L)
+                .tipoHabitacion(TipoHabitacion.DOBLE)
+                .contadorHabitacion(2)
+                .precioPorNoche(null) // Precio nulo
+                .build();
+
+        Set<ConstraintViolation<HabitacionDTO>> violations = validator.validate(habitacionDTO);
+
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("precioPorNoche")
+                && v.getMessage().equals("El preciop no puede estar vacio"));
+    }
+
+    @Test
+    public void testAllNullValues() {
+        HabitacionDTO habitacionDTO = HabitacionDTO.builder()
+                .hotelId(null)
+                .tipoHabitacion(null)
+                .contadorHabitacion(null)
+                .precioPorNoche(null)
+                .build();
+
+        Set<ConstraintViolation<HabitacionDTO>> violations = validator.validate(habitacionDTO);
+
+        assertThat(violations).isNotEmpty();
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("contadorHabitacion")
+                && v.getMessage().equals("El contador de habitacion no puede estar vacio"));
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("precioPorNoche")
+                && v.getMessage().equals("El preciop no puede estar vacio"));
+    }
 }
+
+
