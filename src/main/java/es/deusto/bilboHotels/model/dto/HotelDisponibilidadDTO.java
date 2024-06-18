@@ -22,4 +22,16 @@ public class HotelDisponibilidadDTO {
 
     private Integer maxHabitacionesDoblesDisponibles;
 
+    @Override
+public String toString() {
+    return "HotelDisponibilidadDTO{" +
+            "id=" + id +
+            ", nombre='" + nombre + '\'' +
+            ", direccionDTO=" + direccionDTO +
+            ", habitacionDTOs=" + habitacionDTOs +
+            ", maxHabitacionesIndividualDisponibles=" + maxHabitacionesIndividualDisponibles +
+            ", maxHabitacionesDoblesDisponibles=" + maxHabitacionesDoblesDisponibles +
+            '}';
+}
+
 }

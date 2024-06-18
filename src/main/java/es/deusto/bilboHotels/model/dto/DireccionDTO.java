@@ -26,4 +26,13 @@ public class DireccionDTO {
     @NotBlank(message = "El país no puede estar vacío")
     @Pattern(regexp = "^(?!\\s*$)[A-Za-z ]+$", message = "El país solo puede contener letras")
     private String pais;
+
+    @Override
+public String toString() {
+    return "DireccionDTO{" +
+            "lineaDireccion='" + lineaDireccion + '\'' +
+            ", ciudad='" + ciudad + '\'' +
+            ", pais='" + pais + '\'' +
+            '}';
+}
 }
