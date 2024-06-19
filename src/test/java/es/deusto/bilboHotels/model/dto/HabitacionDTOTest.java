@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HabitacionDTOTest {
 
@@ -20,6 +23,22 @@ public class HabitacionDTOTest {
     public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
+    }
+
+    @Test
+    public void testSetContadorHabitacion() {
+        HabitacionDTO habitacionDTO = new HabitacionDTO();
+        habitacionDTO.setContadorHabitacion(2);
+
+        assertEquals(2, habitacionDTO.getContadorHabitacion());
+    }
+
+    @Test
+    public void testSetPrecioPorNoche() {
+        HabitacionDTO habitacionDTO = new HabitacionDTO();
+        habitacionDTO.setPrecioPorNoche(100.0);
+
+        assertEquals(100.0, habitacionDTO.getPrecioPorNoche());
     }
 
     @Test
@@ -172,6 +191,20 @@ public class HabitacionDTOTest {
 
         assertThat(habitacionDTO1).isNotEqualTo(habitacionDTO2);
         assertThat(habitacionDTO1.hashCode()).isNotEqualTo(habitacionDTO2.hashCode());
+    }
+
+    @Test
+    public void testToString() {
+        HabitacionDTO habitacionDTO = HabitacionDTO.builder()
+                .id(1L)
+                .hotelId(1L)
+                .tipoHabitacion(TipoHabitacion.DOBLE)
+                .contadorHabitacion(2)
+                .precioPorNoche(100.0)
+                .build();
+
+        String expectedToString = "HabitacionDTO(id=1, hotelId=1, tipoHabitacion=DOBLE, contadorHabitacion=2, precioPorNoche=100.0)";
+        assertEquals(expectedToString, habitacionDTO.toString());
     }
 }
 
