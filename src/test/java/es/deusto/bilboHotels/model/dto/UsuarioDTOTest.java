@@ -95,4 +95,37 @@ public class UsuarioDTOTest {
         assertThat(violations, is(not(empty())));
         assertThat(violations, hasItem(hasProperty("message", is("El apellido solo puede contener letras"))));
     }
+
+    @Test
+    public void testEqualsAndHashCode() {
+        UsuarioDTO usuarioDTO1 = usuarioDTOBuilder.build();
+        UsuarioDTO usuarioDTO2 = usuarioDTOBuilder.build();
+
+        assertThat(usuarioDTO1.equals(usuarioDTO2), is(true));
+        assertThat(usuarioDTO1.hashCode(), equalTo(usuarioDTO2.hashCode()));
+    }
+
+    @Test
+    public void testToString() {
+        UsuarioDTO usuarioDTO = usuarioDTOBuilder.build();
+        String expectedToString = "UsuarioDTO(id=1, username=test@example.com, nombre=John, apellido=Doe, rol=" + usuarioDTO.getRol() + ")";
+        assertThat(usuarioDTO.toString(), equalTo(expectedToString));
+    }
+
+    @Test
+    public void testSetters() {
+        UsuarioDTO usuarioDTO = usuarioDTOBuilder.build();
+
+        usuarioDTO.setId(2L);
+        usuarioDTO.setUsername("updated@example.com");
+        usuarioDTO.setNombre("Jane");
+        usuarioDTO.setApellido("Smith");
+        usuarioDTO.setRol(null); // Updating rol to null
+
+        assertThat(usuarioDTO.getId(), is(2L));
+        assertThat(usuarioDTO.getUsername(), is("updated@example.com"));
+        assertThat(usuarioDTO.getNombre(), is("Jane"));
+        assertThat(usuarioDTO.getApellido(), is("Smith"));
+        assertThat(usuarioDTO.getRol(), is(nullValue()));
+    }
 }
