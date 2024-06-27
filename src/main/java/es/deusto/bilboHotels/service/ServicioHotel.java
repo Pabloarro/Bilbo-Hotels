@@ -35,4 +35,9 @@ public interface ServicioHotel {
 
     HotelDTO mapHotelToHotelDto(Hotel hotel);
 
+    // Métodos necesarios para los tests
+    //Hotel createHotel(Hotel hotel);
+
+    //Hotel updateHotel(Long id, Hotel hotel);
+
 }
