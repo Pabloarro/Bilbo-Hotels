@@ -25,16 +25,13 @@ import es.deusto.bilboHotels.model.Pago;
 import es.deusto.bilboHotels.model.Reserva;
 
 public class ReservaTest {
-    @InjectMocks
     private Reserva reserva;
-    @Mock
     private Cliente cliente;
     private Hotel hotel;
     private List<HabitacionReservada> habitacionReservadas;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
         cliente = new Cliente();
         hotel = new Hotel();
         habitacionReservadas = new ArrayList<>();

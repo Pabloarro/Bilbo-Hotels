@@ -16,16 +16,13 @@ import es.deusto.bilboHotels.model.Reserva;
 import es.deusto.bilboHotels.model.enums.TipoHabitacion;
 
 public class HabitacionReservadaTest {
-    @InjectMocks
     private HabitacionReservada habitacionReservada1;
     private HabitacionReservada habitacionReservada2;
-    @Mock
     private Reserva reserva1;
     private Reserva reserva2;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
         reserva1 = new Reserva();
         reserva1.setId(1L);
 

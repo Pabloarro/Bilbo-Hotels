@@ -19,16 +19,13 @@ import es.deusto.bilboHotels.model.HotelManager;
 import es.deusto.bilboHotels.model.Usuario;
 
 public class HotelManagerTest {
-    @InjectMocks
     private HotelManager hotelManager1;
     private HotelManager hotelManager2;
-    @Mock
     private Usuario usuario;
     private List<Hotel> hotelList;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
         usuario = new Usuario(); // Suponiendo que tienes una clase Usuario
         usuario.setId(1L); // Set an ID for the usuario
 

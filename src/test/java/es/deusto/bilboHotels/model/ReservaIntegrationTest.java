@@ -24,26 +24,18 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 class ReservaIntegrationTest {
-
-    @Mock
     private ServicioReserva servicioReserva;
 
-    @Mock
     private ServicioHotel servicioHotel;
 
-    @Mock
     private ServicioHabitacion servicioHabitacion;
 
-    @Mock
     private ServicioCliente servicioCliente;
 
-    @Mock
     private ServicioPago servicioPago;
 
-    @Mock
     private ServicioDisponibilidad servicioDisponibilidad;
 
-    @InjectMocks
     private ReservaIntegrationTest reservaIntegrationTest;
 
     private Hotel hotel;
@@ -54,7 +46,6 @@ class ReservaIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
 
         Rol rolManager = new Rol(TipoRol.HOTEL_MANAGER);
         Usuario managerUsuario = new Usuario(1L, "managerUser", "password", LocalDateTime.now(), "manager@example.com", "12345678", rolManager, null, null, null);

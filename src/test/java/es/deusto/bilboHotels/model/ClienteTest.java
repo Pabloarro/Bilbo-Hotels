@@ -19,10 +19,8 @@ import es.deusto.bilboHotels.model.Reserva;
 import es.deusto.bilboHotels.model.Usuario;
 
 public class ClienteTest {
-    @InjectMocks
     private Cliente cliente1;
     private Cliente cliente2;
-    @Mock
     private Usuario usuario1;
     private Usuario usuario2;
     private Reserva reserva1;
@@ -30,7 +28,6 @@ public class ClienteTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
         usuario1 = new Usuario();
         usuario1.setId(1L);
         usuario1.setUsername("user1");

@@ -21,15 +21,12 @@ import es.deusto.bilboHotels.model.enums.EstadoPago;
 import es.deusto.bilboHotels.model.enums.MetodoPago;
 
 public class PagoTest {
-    @InjectMocks
     private Pago pago1;
     private Pago pago2;
-    @Mock
     private Reserva reserva;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
         reserva = new Reserva();
         pago1 = new Pago();
         pago1.setId(1L);

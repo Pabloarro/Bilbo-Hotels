@@ -20,16 +20,13 @@ import es.deusto.bilboHotels.model.Hotel;
 import es.deusto.bilboHotels.model.enums.TipoHabitacion;
 
 public class HabitacionTest {
-    @InjectMocks
     private Habitacion habitacion1;
     private Habitacion habitacion2;
-    @Mock
     private Hotel hotel;
     private List<Disponibilidad> availabilities;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
         hotel = new Hotel(); // Suponiendo que tienes una clase Hotel
         hotel.setId(1L); // Set an ID for the hotel
         
