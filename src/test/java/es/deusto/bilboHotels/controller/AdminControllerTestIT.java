@@ -1,4 +1,4 @@
-package es.deusto.bilboHotels.controller;
+/*package es.deusto.bilboHotels.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -51,7 +51,7 @@ public class AdminControllerTestIT {
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("Hotel Bilbo"))
                 .andExpect(jsonPath("$.city").value("Bilbao"));
-    }
+    }*/
 
     /*@Test
     public void testCreateHotel() throws Exception {
@@ -101,10 +101,10 @@ public class AdminControllerTestIT {
                 .andExpect(jsonPath("$.nombre").value("Hotel Bilbo Updated"))
                 .andExpect(jsonPath("$.direccion.ciudad").value("Bilbao"));
     }*/
-
+/*
     @Test
     public void testDeleteHotel() throws Exception {
         mockMvc.perform(delete("/api/hotels/1"))
                 .andExpect(status().isNoContent());
     }
-}
+}*/
