@@ -38,7 +38,7 @@ public class AutenticacionControllerPerformanceTest {
     private BindingResult bindingResult;
     
     @Rule
-    JUnitPerfRule perfTestRule = new JUnitPerfRule(new HtmlReportGenerator("target/junitperf/report.html"));
+    public JUnitPerfRule perfTestRule = new JUnitPerfRule(new HtmlReportGenerator("target/junitperf/report.html"));
 
     @Before
     public void setUp() {
