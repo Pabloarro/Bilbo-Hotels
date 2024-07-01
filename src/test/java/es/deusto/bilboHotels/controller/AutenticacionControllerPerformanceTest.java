@@ -48,8 +48,8 @@ public class AutenticacionControllerPerformanceTest {
 
     @Test
     @PerformanceTest
-    @JUnitPerfTest(threads = 2, durationMs = 5000)
-    @JUnitPerfTestRequirement(meanLatency = 500)
+    @JUnitPerfTest(threads = 2, durationMs = 1000)
+    @JUnitPerfTestRequirement(meanLatency = 100)
     public void testRegisterCustomerAccountSuccess() throws Exception {
         // Prepare mock data
         RegistroUsuarioDTO registroDTO = RegistroUsuarioDTO.builder()
@@ -71,8 +71,8 @@ public class AutenticacionControllerPerformanceTest {
 
     @Test
     @PerformanceTest
-    @JUnitPerfTest(threads = 2, durationMs = 5000)
-    @JUnitPerfTestRequirement(meanLatency = 500)
+    @JUnitPerfTest(threads = 2, durationMs = 1000)
+    @JUnitPerfTestRequirement(meanLatency = 100)
     public void testRegisterCustomerAccountFailureDueToExistingUsername() throws Exception {
         // Prepare mock data
         RegistroUsuarioDTO registroDTO = RegistroUsuarioDTO.builder()
@@ -97,8 +97,8 @@ public class AutenticacionControllerPerformanceTest {
 
     @Test
     @PerformanceTest
-    @JUnitPerfTest(threads = 2, durationMs = 5000)
-    @JUnitPerfTestRequirement(meanLatency = 500)
+    @JUnitPerfTest(threads = 2, durationMs = 1000)
+    @JUnitPerfTestRequirement(meanLatency = 100)
     public void testRegisterCustomerAccountFailureDueToValidationErrors() throws Exception {
         // Prepare mock data
         RegistroUsuarioDTO registroDTO = RegistroUsuarioDTO.builder()
