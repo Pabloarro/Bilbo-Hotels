@@ -1,22 +1,27 @@
 package es.deusto.bilboHotels.controller;
 
-import es.deusto.bilboHotels.model.dto.HotelDisponibilidadDTO;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import es.deusto.bilboHotels.model.dto.HotelBusquedaDTO;
+import es.deusto.bilboHotels.model.dto.HotelDisponibilidadDTO;
 import es.deusto.bilboHotels.service.ServicioBusquedaHotel;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -48,44 +53,45 @@ public class BusquedaHotelController {
     }
 
     @GetMapping("/search-results")
-    public String showSearchResults(@RequestParam String ciudad, @RequestParam String fechaCheckIn, @RequestParam String fechaCheckOut, Model model, RedirectAttributes redirectAttributes) {
-        try {
-            LocalDate parsedFechaCheckIn = LocalDate.parse(fechaCheckIn);
-            LocalDate parsedFechaCheckOut = LocalDate.parse(fechaCheckOut);
+public String showSearchResults(@RequestParam String ciudad, @RequestParam String fechaCheckIn, @RequestParam String fechaCheckOut, Model model, RedirectAttributes redirectAttributes) {
+    try {
+        LocalDate parsedFechaCheckIn = LocalDate.parse(fechaCheckIn);
+        LocalDate parsedFechaCheckOut = LocalDate.parse(fechaCheckOut);
 
-            validateFechasCheckinYCheckout(parsedFechaCheckIn, parsedFechaCheckOut);
+        validateFechasCheckinYCheckout(parsedFechaCheckIn, parsedFechaCheckOut);
 
-            log.info("Buscando hoteles para la ciudad {} entre las fechas {} y {}.", ciudad, fechaCheckIn, fechaCheckOut);
-            List<HotelDisponibilidadDTO> hotels = servicioBusquedaHotel.buscarHotelesDisponiblesByCiudadAndFecha(ciudad, parsedFechaCheckIn, parsedFechaCheckOut);
+        log.info("Buscando hoteles para la ciudad {} entre las fechas {} y {}.", ciudad, fechaCheckIn, fechaCheckOut);
+        List<HotelDisponibilidadDTO> hotels = servicioBusquedaHotel.buscarHotelesDisponiblesByCiudadAndFecha(ciudad, parsedFechaCheckIn, parsedFechaCheckOut);
 
-            if (hotels.isEmpty()) {
-                model.addAttribute("noHotelsFound", true);
-            }
-
-            long duracionDias = ChronoUnit.DAYS.between(parsedFechaCheckIn, parsedFechaCheckOut);
-
-            model.addAttribute("hotels", hotels);
-            model.addAttribute("ciuad", ciudad);
-            model.addAttribute("dias", duracionDias);
-            model.addAttribute("fechaCheckIn", fechaCheckIn);
-            model.addAttribute("fechaCheckOut", fechaCheckOut);
-
-        } catch (DateTimeParseException e) {
-            log.error("Se proporcionó un formato de fecha no válido para la búsqueda en la URL.", e);
-            redirectAttributes.addFlashAttribute("errorMessage", "Formato de fecha no válido. Por favor, utiliza el formulario de búsqueda.");
-            return "redirect:/search";
-        } catch (IllegalArgumentException e) {
-            log.error("Se proporcionaron argumentos no válidos para la búsqueda en la URL", e);
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/search";
-        } catch (Exception e) {
-            log.error("Se produjo un error al buscar hoteles.", e);
-            redirectAttributes.addFlashAttribute("errorMessage", "Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.");
-            return "redirect:/search";
+        if (hotels.isEmpty()) {
+            model.addAttribute("noHotelsFound", true);
         }
 
-        return "hotelsearch/search-results";
+        long duracionDias = ChronoUnit.DAYS.between(parsedFechaCheckIn, parsedFechaCheckOut);
+
+        model.addAttribute("hotels", hotels);
+        model.addAttribute("ciudad", ciudad);  // Asegúrate de que este atributo se agrega al modelo
+        model.addAttribute("dias", duracionDias);
+        model.addAttribute("fechaCheckIn", fechaCheckIn);
+        model.addAttribute("fechaCheckOut", fechaCheckOut);
+
+    } catch (DateTimeParseException e) {
+        log.error("Se proporcionó un formato de fecha no válido para la búsqueda en la URL.", e);
+        redirectAttributes.addFlashAttribute("errorMessage", "Formato de fecha no válido. Por favor, utiliza el formulario de búsqueda.");
+        return "redirect:/search";
+    } catch (IllegalArgumentException e) {
+        log.error("Se proporcionaron argumentos no válidos para la búsqueda en la URL", e);
+        redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+        return "redirect:/search";
+    } catch (Exception e) {
+        log.error("Se produjo un error al buscar hoteles.", e);
+        redirectAttributes.addFlashAttribute("errorMessage", "Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.");
+        return "redirect:/search";
     }
+
+    return "hotelsearch/search-results";
+}
+
 
     @GetMapping("/hotel-details/{id}")
     public String showHotelDetails(@PathVariable Long id, @RequestParam String fechaCheckIn, @RequestParam String fechaCheckOut, Model model, RedirectAttributes redirectAttributes) {
